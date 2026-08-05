@@ -622,7 +622,7 @@ function renderEmailDetail(email) {
                 <span style="
                     display:inline-block; vertical-align:middle;
                     margin-left:8px; padding:3px 10px;
-                    background:transparent; color:var(--chip-text);
+                    background:var(--chip-bg); color:var(--chip-text);
                     border:1px solid var(--chip-border);
                     border-radius:6px; font-size:14px;
                     font-weight:400; line-height:1.4;
@@ -696,7 +696,7 @@ function renderEmailDetail(email) {
                             </td>
                             <td style="color:var(--text-secondary); font-size:15px;">
                                 Standard encryption (TLS).
-                                <a href="#" onclick="return false;" style="color:var(--text-secondary); text-decoration:none; font-weight:500;"> See security details</a>
+                                <a href="#" onclick="return false;" style="color:var(--link-warm); text-decoration:none; font-weight:500;"> See security details</a>
                             </td>
                         </tr>
                     </table>
@@ -737,7 +737,7 @@ function renderEmailDetail(email) {
                         flex:1; justify-content:center;
                         cursor:pointer; transition:background 0.15s;
                         font-family:var(--font-main);
-                    " onmouseover="this.style.background='#cbb098'" onmouseout="this.style.background='var(--reply-pill-bg)'">
+                    " onmouseover="this.style.background='var(--reply-pill-hover)'" onmouseout="this.style.background='var(--reply-pill-bg)'">
                         <!-- Thin curved reply arrow (like &#8617;) -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
                           <polyline points="9 14 4 9 9 4"/>
@@ -753,7 +753,7 @@ function renderEmailDetail(email) {
                         flex:1; justify-content:center;
                         cursor:pointer; transition:background 0.15s;
                         font-family:var(--font-main);
-                    " onmouseover="this.style.background='#cbb098'" onmouseout="this.style.background='var(--reply-pill-bg)'">
+                    " onmouseover="this.style.background='var(--reply-pill-hover)'" onmouseout="this.style.background='var(--reply-pill-bg)'">
                         <!-- Thin curved forward arrow (like &#8618;, mirror of reply) -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; transform:scaleX(-1);">
                           <polyline points="9 14 4 9 9 4"/>
@@ -769,7 +769,7 @@ function renderEmailDetail(email) {
                         justify-content: center; cursor: pointer;
                         color: var(--reply-pill-text);
                         transition: background 0.15s;
-                    " onmouseover="this.style.background='#cbb098'" onmouseout="this.style.background='var(--reply-pill-bg)'">
+                    " onmouseover="this.style.background='var(--reply-pill-hover)'" onmouseout="this.style.background='var(--reply-pill-bg)'">
                         <span class="material-icons-outlined" style="font-size:24px;">sentiment_satisfied</span>
                     </button>
                 </div>
