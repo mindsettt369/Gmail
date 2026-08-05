@@ -307,7 +307,7 @@ input {
     width: 32px;
     height: 32px;
     border-radius: var(--radius-full);
-    background: linear-gradient(135deg, #8e24aa, #e040fb);
+    background: #e8590c;
     color: white;
     font-size: 14px;
     font-weight: 500;
@@ -1267,7 +1267,7 @@ input {
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #7b2ff7, #a855f7);
+        background: #e8590c;
         color: white;
         font-size: 15px;
         font-weight: 500;
@@ -1381,7 +1381,7 @@ input {
     #mobile-avatar-btn .avatar {
         width: 32px;
         height: 32px;
-        background: linear-gradient(135deg, #7b2ff7, #a855f7);
+        background: #e8590c;
         color: white;
         font-size: 14px;
         font-weight: 500;

@@ -49,8 +49,8 @@ const emails = [
         subject: 'Your Supabase Project mindexis i…',
         snippet: 'Hi there, To save on cloud resour…',
         body: `<p>Hi there,</p><p>To save on cloud resources, we recommend upgrading your Supabase project mindexis. This will help optimize performance and reduce costs significantly.</p>`,
-        date: '29 Jul',
-        fullDate: 'Jul 29, 2026, 10:33 AM',
+        date: '10:33',
+        fullDate: 'Aug 5, 2026, 10:33 AM',
         unread: false, starred: false, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'default',
@@ -97,8 +97,8 @@ const emails = [
         subject: 'Amazon Web Services GST Invoic…',
         snippet: 'AWS logo Greetings from Amazon…',
         body: `<p>Greetings from Amazon Web Services. Please find your GST invoice attached for this billing period.</p>`,
-        date: '28 Jul',
-        fullDate: 'Jul 28, 2026, 10:30 AM',
+        date: '2 Aug',
+        fullDate: 'Aug 2, 2026, 10:30 AM',
         unread: true, starred: false, important: false,
         labels: [], hasAttachment: true,
         avatarType: 'default',
@@ -111,8 +111,8 @@ const emails = [
         subject: 'Bitget CFD Weekly: How to Trade…',
         snippet: 'Dear Bitget users: This week\'s un…',
         body: `<p>Dear Bitget users,</p><p>This week's update brings exciting new trading features and market insights for CFD traders.</p>`,
-        date: '27 Jul',
-        fullDate: 'Jul 27, 2026, 9:15 AM',
+        date: '1 Aug',
+        fullDate: 'Aug 1, 2026, 9:15 AM',
         unread: false, starred: false, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'default',
@@ -1313,22 +1313,22 @@ const addAccountBackBtn = $('#add-account-back-btn');
 
 // Default accounts (seeded)
 const DEFAULT_ACCOUNTS = [
-    { name: 'Unknown User', email: 'unknown@gmail.com', color: '#f44336', photo: null },
+    { name: 'Aryan', email: 'mindsettt369@gmail.com', color: '#e8590c', photo: null },
 ];
 
 // Load accounts from localStorage or seed defaults
 function loadAccounts() {
-    const stored = localStorage.getItem('gmail_accounts_v2');
+    const stored = localStorage.getItem('gmail_accounts_v3');
     if (stored) {
         try { return JSON.parse(stored); } catch(e) { /* fall through */ }
     }
     // Seed defaults on first load
-    localStorage.setItem('gmail_accounts_v2', JSON.stringify(DEFAULT_ACCOUNTS));
+    localStorage.setItem('gmail_accounts_v3', JSON.stringify(DEFAULT_ACCOUNTS));
     return [...DEFAULT_ACCOUNTS];
 }
 
 function saveAccounts(accounts) {
-    localStorage.setItem('gmail_accounts_v2', JSON.stringify(accounts));
+    localStorage.setItem('gmail_accounts_v3', JSON.stringify(accounts));
 }
 
 let userAccounts = loadAccounts();
@@ -1337,6 +1337,7 @@ let currentActiveAccount = userAccounts[0] || DEFAULT_ACCOUNTS[0];
 function updateActiveAccountUI() {
     const mainAvatar = $('#main-account-avatar');
     const userAvatar = $('#user-avatar');
+    const mobileAvatar = $('#mobile-user-avatar');
     const accountEmailDisplay = document.querySelector('.account-email');
     const accountNameDisplay = document.querySelector('.account-name');
     
@@ -1352,6 +1353,10 @@ function updateActiveAccountUI() {
     if (userAvatar) {
         userAvatar.textContent = currentActiveAccount.photo ? '' : initial;
         userAvatar.setAttribute('style', bgStyle + ' overflow: hidden;');
+    }
+    if (mobileAvatar) {
+        mobileAvatar.textContent = currentActiveAccount.photo ? '' : initial;
+        mobileAvatar.setAttribute('style', bgStyle + ' overflow: hidden;');
     }
     if (accountEmailDisplay) {
         accountEmailDisplay.textContent = currentActiveAccount.email;
