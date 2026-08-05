@@ -1,0 +1,11 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.gmailclone.app",
+    "sha256_cert_fingerprints": [
+      "67:53:F0:82:DE:92:EE:64:83:C4:39:B9:3D:3D:49:B9:F8:A7:59:D5:BA:EE:E8:C5:1C:A2:98:FE:85:A7:A2:E6"
+    ]
+  }
+}]
+

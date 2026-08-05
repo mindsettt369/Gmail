@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="description" content="Gmail Clone - A beautiful, feature-rich email client application with modern Material Design interface">
+    <title>Gmail Clone</title>
+    <script>
+      // NUCLEAR CACHE BUSTER — forces reload for all workers automatically
+      var APP_VERSION = 'v57-gmail-svg-1754358000';
+      var storedVersion = localStorage.getItem('app_version');
+      
+      // Auto-reload when a new service worker takes over! (Crucial for workers who don't clear cache)
+      if ('serviceWorker' in navigator) {
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', function() {
+          if (refreshing) return;
+          refreshing = true;
+          window.location.reload();
+        });
+      }
+
+      // Always nuke service workers and caches on version mismatch
+      if (storedVersion !== APP_VERSION) {
+        if ('caches' in window) {
+          caches.keys().then(function(names) {
+            names.forEach(function(name) { caches.delete(name); });
+          });
+        }
+        localStorage.setItem('app_version', APP_VERSION);
+        // Hard reload with timestamp to bust CDN/proxy caches too
+        if (!window.location.search.includes('nocache')) {
+          window.location.replace(window.location.href.split('?')[0] + '?nocache=' + APP_VERSION + '&t=' + Date.now());
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="index_v38.css">
+    <link rel="stylesheet" href="advanced_features.css?v=6">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1210">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Gmail Clone">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="app-splash" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#1f1f1f; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 0.4s ease;">
+        <!-- Container for logo -->
+        <div style="flex:1; display:flex; align-items:center; justify-content:center;">
+            <!-- M Logo with official colors -->
+            <svg width="84" height="84" viewBox="52 42 88 66" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/>
+                <path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/>
+                <path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/>
+                <path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/>
+                <path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/>
+            </svg>
+        </div>
+        
+        <!-- Bottom text -->
+        <div style="margin-bottom:48px; display:flex; flex-direction:column; align-items:center;">
+            <div style="font-family:'Google Sans', sans-serif; font-size:16px; color:#e3e3e3; opacity:0.9;">Google Workspace</div>
+        </div>
+    </div>
+    <!-- ====== HEADER ====== -->
+
+    <header class="header" id="main-header">
+        <div class="header-left">
+            <button class="icon-btn hamburger-btn" id="hamburger-btn" aria-label="Toggle sidebar">
+                <span class="material-icons">menu</span>
+            </button>
+            <div class="logo" id="logo">
+                <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png" srcset="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_2x_r5.png 2x" alt="Gmail" style="width:109px;height:40px; margin-left: 8px;">
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar" id="search-bar">
+                <button class="icon-btn search-icon hidden-mobile" id="search-icon" aria-label="Search">
+                    <span class="material-icons">search</span>
+                </button>
+                <button class="icon-btn hamburger-btn hidden-desktop" id="mobile-hamburger-btn" aria-label="Toggle sidebar">
+                    <span class="material-icons">menu</span>
+                </button>
+                
+                <input type="text" class="search-input" id="search-input" placeholder="Search in emails" autocomplete="off">
+                
+                <button class="icon-btn search-options-btn hidden-mobile" id="search-options-btn" aria-label="Search options">
+                    <span class="material-icons">tune</span>
+                </button>
+                <button class="icon-btn avatar-btn hidden-desktop" id="mobile-avatar-btn">
+                    <div class="avatar">R</div>
+                </button>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="icon-btn" id="help-btn" aria-label="Support">
+                <span class="material-icons-outlined">help_outline</span>
+            </button>
+            <button class="icon-btn" id="settings-btn" aria-label="Settings">
+                <span class="material-icons-outlined">settings</span>
+            </button>
+            <button class="icon-btn" id="apps-btn" aria-label="Google apps">
+                <span class="material-icons-outlined">apps</span>
+            </button>
+            <button class="avatar-btn" id="avatar-btn" aria-label="Google Account">
+                <div class="avatar" id="user-avatar">R</div>
+            </button>
+        </div>
+    </header>
+
+    <!-- ====== SIDEBAR BACKDROP ====== -->
+    <div class="sidebar-backdrop hidden" id="sidebar-backdrop"></div>
+
+    <!-- ====== MAIN LAYOUT ====== -->
+    <div class="main-layout" id="main-layout">
+        <!-- ====== SIDEBAR ====== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-mobile-header hidden-desktop" style="border-bottom: 1px solid var(--border-light); padding-bottom: 12px; margin-bottom: 8px;">
+                <h2 style="font-weight: 400; font-size: 20px;">Gmail</h2>
+            </div>
+            <div class="sidebar-inner">
+                <button class="compose-btn hidden-mobile" id="compose-btn">
+                    <span class="material-icons-outlined compose-icon">edit</span>
+                    <span class="compose-text">Compose</span>
+                </button>
+                <nav class="nav-list" id="nav-list" aria-label="Email folders">
+                    <a href="#" class="nav-item all-inboxes-pill hidden-desktop">
+                        <span class="material-icons-outlined nav-icon">all_inbox</span>
+                        <span class="nav-label">All inboxes</span>
+                    </a>
+                    
+                    <div class="sidebar-divider hidden-desktop" style="margin: 4px 0;"></div>
+                    
+                    <a href="#" class="nav-item active" data-folder="inbox">
+                        <span class="material-icons-outlined nav-icon">inbox</span>
+                        <span class="nav-label">Primary</span>
+                        <span class="nav-badge" id="inbox-count" style="background:#d8c9bc; color:#1a1210;">1 new</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="promotions">
+                        <span class="material-icons-outlined nav-icon">local_offer</span>
+                        <span class="nav-label">Promotions</span>
+                        <span class="nav-badge" style="background:#81c995; color:#000;">24 new</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="social">
+                        <span class="material-icons-outlined nav-icon">people</span>
+                        <span class="nav-label">Social</span>
+                        <span class="nav-badge" style="background:#8ab4f8; color:#000;">49 new</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="updates">
+                        <span class="material-icons-outlined nav-icon">info</span>
+                        <span class="nav-label">Updates</span>
+                        <span class="nav-badge" style="background:#fcad70; color:#000;">39 new</span>
+                    </a>
+
+                    <div class="sidebar-section-title">All labels</div>
+
+                    <a href="#" class="nav-item" data-folder="starred">
+                        <span class="material-icons-outlined nav-icon">star_border</span>
+                        <span class="nav-label">Starred</span>
+                        <span class="nav-badge" style="background:#8ab4f8; color:#000;">new</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="snoozed">
+                        <span class="material-icons-outlined nav-icon">schedule</span>
+                        <span class="nav-label">Snoozed</span>
+                        <span class="nav-badge" style="background:#81c995; color:#000;">new</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="important">
+                        <span class="material-icons-outlined nav-icon">label_important</span>
+                        <span class="nav-label">Important</span>
+                        <span class="nav-count-text">207</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="purchases">
+                        <span class="material-icons-outlined nav-icon">shopping_bag</span>
+                        <span class="nav-label">Purchases</span>
+                        <span class="nav-count-text">325</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="travel">
+                        <span class="material-icons-outlined nav-icon">flight_takeoff</span>
+                        <span class="nav-label">Travel</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="sent">
+                        <span class="material-icons-outlined nav-icon">send</span>
+                        <span class="nav-label">Sent</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="scheduled">
+                        <span class="material-icons-outlined nav-icon">schedule_send</span>
+                        <span class="nav-label">Scheduled</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="outbox">
+                        <span class="material-icons-outlined nav-icon">outbox</span>
+                        <span class="nav-label">Outbox</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="drafts">
+                        <span class="material-icons-outlined nav-icon">insert_drive_file</span>
+                        <span class="nav-label">Drafts</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="all">
+                        <span class="material-icons-outlined nav-icon">mail</span>
+                        <span class="nav-label">All mail</span>
+                        <span class="nav-count">110</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="spam">
+                        <span class="material-icons-outlined nav-icon">report</span>
+                        <span class="nav-label">Spam</span>
+                        <span class="nav-count">1</span>
+                    </a>
+                    <a href="#" class="nav-item" data-folder="trash">
+                        <span class="material-icons-outlined nav-icon">delete</span>
+                        <span class="nav-label">Bin</span>
+                    </a>
+                    
+                    <a href="#" class="nav-item" data-folder="manage-subs">
+                        <span class="material-icons-outlined nav-icon">unsubscribe</span>
+                        <span class="nav-label">Manage subscriptions</span>
+                    </a>
+                    
+                    <button class="create-label-btn" id="create-label-btn">
+                        <span class="material-icons-outlined">add</span>
+                        Create label
+                    </button>
+
+                    <div class="sidebar-section-title">Google apps</div>
+                    <a href="#" class="nav-item">
+                        <span class="material-icons-outlined nav-icon">calendar_today</span>
+                        <span class="nav-label">Calendar</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="material-icons-outlined nav-icon">account_circle</span>
+                        <span class="nav-label">Contacts</span>
+                    </a>
+
+                    <div style="height: 1px; background: var(--border-light); margin: 8px 0;"></div>
+
+                    <a href="#" class="nav-item" id="settings-nav-btn">
+                        <span class="material-icons-outlined nav-icon">settings</span>
+                        <span class="nav-label">Settings</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="material-icons-outlined nav-icon">help_outline</span>
+                        <span class="nav-label">Help and feedback</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- ====== MAIN CONTENT ====== -->
+        <main class="main-content" id="main-content">
+            <!-- Removed All inboxes header -->
+
+            <!-- Tab bar (Primary, Social, Promotions) -->
+            <div class="tab-bar" id="tab-bar">
+                <button class="tab active" data-tab="primary" id="tab-primary">
+                    <span class="material-icons tab-icon">inbox</span>
+                    <span class="tab-label">Primary</span>
+                </button>
+                <button class="tab" data-tab="social" id="tab-social">
+                    <span class="material-icons tab-icon">people</span>
+                    <span class="tab-label">Social</span>
+                    <span class="tab-badge" id="social-badge">2 new</span>
+                </button>
+                <button class="tab" data-tab="promotions" id="tab-promotions">
+                    <span class="material-icons tab-icon">local_offer</span>
+                    <span class="tab-label">Promotions</span>
+                    <span class="tab-badge" id="promo-badge">5 new</span>
+                </button>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="toolbar" id="toolbar">
+                <div class="toolbar-left">
+                    <label class="checkbox-wrapper" id="select-all-wrapper">
+                        <input type="checkbox" id="select-all-checkbox">
+                        <span class="custom-checkbox">
+                            <span class="material-icons check-icon">check</span>
+                        </span>
+                    </label>
+                    <button class="icon-btn toolbar-btn" id="refresh-btn" aria-label="Refresh">
+                        <span class="material-icons-outlined">refresh</span>
+                    </button>
+                    <button class="icon-btn toolbar-btn" id="more-toolbar-btn" aria-label="More">
+                        <span class="material-icons-outlined">more_vert</span>
+                    </button>
+                </div>
+                <div class="toolbar-right">
+                    <span class="pagination-info" id="pagination-info">1–50 of 1,234</span>
+                    <button class="icon-btn toolbar-btn" id="prev-page-btn" aria-label="Previous page">
+                        <span class="material-icons">chevron_left</span>
+                    </button>
+                    <button class="icon-btn toolbar-btn" id="next-page-btn" aria-label="Next page">
+                        <span class="material-icons">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Email List -->
+            <div class="email-list" id="email-list">
+                <!-- Emails are dynamically rendered by JS -->
+            </div>
+
+            <!-- Email Detail View (hidden by default) -->
+            <div class="email-detail hidden" id="email-detail">
+                <div class="email-detail-header" style="display:flex; align-items:center; justify-content:space-between; padding:4px 8px; min-height:56px; background:#1c130e !important; border:none; border-bottom:none; box-shadow:none; outline:none;">
+                    <button class="icon-btn" id="back-to-list-btn" aria-label="Back to inbox" style="width:48px; height:48px;">
+                        <span class="material-icons-outlined" style="font-size:24px; color:#e3e3e3;">arrow_back</span>
+                    </button>
+                    <div style="display:flex; align-items:center; gap:2px;">
+                        <button class="icon-btn" aria-label="Archive" style="width:48px; height:48px;"><span class="material-icons-outlined" style="font-size:24px; color:#e3e3e3;">archive</span></button>
+                        <button class="icon-btn" aria-label="Delete" style="width:48px; height:48px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#e3e3e3">
+                                <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"/>
+                                <path d="M9 8h2v9H9zm4 0h2v9h-2z"/>
+                            </svg>
+                        </button>
+                        <button class="icon-btn" aria-label="Mark as unread" style="width:48px; height:48px;"><span class="material-icons-outlined" style="font-size:24px; color:#e3e3e3;">mark_email_unread</span></button>
+                        <button class="icon-btn" aria-label="More" style="width:48px; height:48px;"><span class="material-icons-outlined" style="font-size:24px; color:#e3e3e3;">more_vert</span></button>
+                    </div>
+                </div>
+                <div class="email-detail-body" id="email-detail-body">
+                    <!-- Filled dynamically -->
+                </div>
+                <div class="email-detail-footer" id="email-detail-footer">
+                    <!-- Filled dynamically -->
+                </div>
+            </div>
+        </main>
+
+        <!-- ====== RIGHT SIDEBAR (Apps) ====== -->
+        <aside class="right-sidebar" id="right-sidebar">
+            <button class="icon-btn right-sidebar-btn" id="calendar-btn" aria-label="Calendar">
+                <span class="material-icons-outlined">calendar_today</span>
+            </button>
+            <button class="icon-btn right-sidebar-btn" id="keep-btn" aria-label="Keep">
+                <span class="material-icons-outlined">lightbulb</span>
+            </button>
+            <button class="icon-btn right-sidebar-btn" id="tasks-btn" aria-label="Tasks">
+                <span class="material-icons-outlined">check_circle</span>
+            </button>
+            <button class="icon-btn right-sidebar-btn" id="contacts-btn" aria-label="Contacts">
+                <span class="material-icons-outlined">person</span>
+            </button>
+            <div class="right-sidebar-divider"></div>
+            <button class="icon-btn right-sidebar-btn" id="addons-btn" aria-label="Get Add-ons">
+                <span class="material-icons-outlined">add_box</span>
+            </button>
+        </aside>
+    </div>
+
+    <!-- ====== MOBILE BOTTOM NAV & FAB ====== -->
+    <div id="mobile-bottom-nav" style="position:fixed; bottom:0; left:0; right:0; height:80px; background:#1f1b16; display:flex; align-items:center; justify-content:space-around; z-index:200; border-top:1px solid #2e2a25;" class="hidden-desktop">
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; cursor:pointer; width:64px; margin-top:-10px;">
+            <div style="position:relative; display:inline-flex; align-items:center; justify-content:center; background:#5c3a21; width:64px; height:32px; border-radius:16px;">
+                <span class="material-icons" style="font-size:24px; color:#ebd1b7;">mail</span>
+                <span style="position:absolute; top:-4px; right:-8px; background:#f2b8b5; color:#410002; font-size:10px; font-weight:700; padding:2px 5px; border-radius:12px; line-height:1.2; white-space:nowrap; border: 2px solid #1f1b16;">99+</span>
+            </div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; width:64px; margin-top:-10px;">
+            <div style="display:inline-flex; align-items:center; justify-content:center; height:32px;">
+                <span class="material-icons-outlined" style="font-size:24px; color:#d3c3b5;">videocam</span>
+            </div>
+        </div>
+    </div>
+    
+    <button class="mobile-fab hidden-desktop" id="mobile-compose-btn">
+        <span class="material-icons-outlined" style="font-size:24px;">edit</span>
+        <span style="font-family: var(--font-main); font-size: 14px; font-weight: 500; margin-left: 12px; letter-spacing: 0.25px; padding-right: 4px;">Compose</span>
+    </button>
+
+    <!-- ====== MOBILE FULL-SCREEN COMPOSE ====== -->
+    <div class="mobile-compose-screen hidden" id="mobile-compose-screen">
+        <!-- Top bar -->
+        <div class="mc-topbar">
+            <button class="mc-back-btn" id="mc-back-btn" aria-label="Close compose">
+                <span class="material-icons">arrow_back</span>
+            </button>
+            <div class="mc-topbar-actions">
+                <button class="mc-action-btn" id="mc-attach-btn" aria-label="Attach">
+                    <span class="material-icons">attach_file</span>
+                </button>
+                <button class="mc-action-btn" id="mc-send-btn" aria-label="Send">
+                    <span class="material-icons">send</span>
+                </button>
+                <button class="mc-action-btn" id="mc-more-btn" aria-label="More">
+                    <span class="material-icons">more_vert</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- From field -->
+        <div class="mc-field mc-from-field">
+            <span class="mc-label">From</span>
+            <span class="mc-from-email" id="mc-from-email">mindsettt369@gmail.com</span>
+            <span class="mc-chevron material-icons">expand_more</span>
+        </div>
+
+        <!-- To field -->
+        <div class="mc-field mc-to-field">
+            <span class="mc-label">To</span>
+            <input class="mc-input" id="mc-to-input" type="email" autocomplete="off" placeholder="">
+            <button class="mc-expand-btn" id="mc-to-expand-btn" aria-label="Show Cc/Bcc">
+                <span class="material-icons">expand_more</span>
+            </button>
+        </div>
+
+        <!-- Cc field (hidden by default) -->
+        <div class="mc-field hidden" id="mc-cc-field">
+            <span class="mc-label">Cc</span>
+            <input class="mc-input" id="mc-cc-input" type="email" autocomplete="off" placeholder="">
+        </div>
+
+        <!-- Bcc field (hidden by default) -->
+        <div class="mc-field hidden" id="mc-bcc-field">
+            <span class="mc-label">Bcc</span>
+            <input class="mc-input" id="mc-bcc-input" type="email" autocomplete="off" placeholder="">
+        </div>
+
+        <!-- Subject field -->
+        <div class="mc-field mc-subject-field">
+            <input class="mc-input mc-subject-input" id="mc-subject-input" type="text" placeholder="Subject" autocomplete="off">
+        </div>
+
+        <!-- Body -->
+        <div class="mc-body-wrap">
+            <div class="mc-body" id="mc-body" contenteditable="true" data-placeholder="Compose email"></div>
+        </div>
+    </div>
+
+    <!-- ====== SEND ACTION POPUP (Send / Receive) ====== -->
+    <div class="sr-popup hidden" id="sr-popup">
+        <div class="sr-popup-arrow"></div>
+        <button class="sr-option" id="sr-send-option">
+            <span class="material-icons">send</span>
+            <div class="sr-option-text">
+                <span class="sr-option-title">Send</span>
+                <span class="sr-option-desc">Goes to Sent folder</span>
+            </div>
+        </button>
+        <div class="sr-divider"></div>
+        <button class="sr-option" id="sr-receive-option">
+            <span class="material-icons">move_to_inbox</span>
+            <div class="sr-option-text">
+                <span class="sr-option-title">Receive</span>
+                <span class="sr-option-desc">Arrives in Inbox</span>
+            </div>
+        </button>
+    </div>
+
+    <!-- ====== DATE TIME PICKER MODAL ====== -->
+    <div class="dt-overlay hidden" id="dt-overlay"></div>
+    <div class="dt-modal hidden" id="dt-modal">
+        <div class="dt-header">
+            <span class="dt-title" id="dt-title">Select Date & Time</span>
+        </div>
+        <div class="dt-body">
+            <div class="dt-row">
+                <label class="dt-label">Date</label>
+                <input type="date" class="dt-input" id="dt-date-input">
+            </div>
+            <div class="dt-row">
+                <label class="dt-label">Time</label>
+                <input type="time" class="dt-input" id="dt-time-input">
+            </div>
+        </div>
+        <div class="dt-actions">
+            <button class="dt-cancel-btn" id="dt-cancel-btn">Cancel</button>
+            <button class="dt-confirm-btn" id="dt-confirm-btn">Confirm</button>
+        </div>
+    </div>
+
+    <!-- ====== ADD ACCOUNT MODAL (From field) ====== -->
+    <div class="ac-overlay hidden" id="ac-overlay"></div>
+    <div class="ac-modal hidden" id="ac-modal">
+        <!-- Step 1: Name -->
+        <div class="ac-step active" id="ac-step-name">
+            <div class="ac-header">
+                <button class="ac-close-btn" id="ac-name-cancel"><span class="material-icons">close</span></button>
+                <span class="ac-title">Add Account</span>
+                <button class="ac-next-btn" id="ac-name-next">Next</button>
+            </div>
+            <div class="ac-body">
+                <div class="ac-icon-wrap"><span class="material-icons" style="font-size:40px;color:#c49a6c;">person</span></div>
+                <p class="ac-step-label">Step 1 of 4 — Your Name</p>
+                <input class="ac-input" id="ac-name-input" type="text" placeholder="Enter your name" autocomplete="off">
+                <p class="ac-hint">This name will appear as sender.</p>
+            </div>
+        </div>
+        <!-- Step 2: Gmail -->
+        <div class="ac-step" id="ac-step-gmail">
+            <div class="ac-header">
+                <button class="ac-close-btn" id="ac-gmail-back"><span class="material-icons">arrow_back</span></button>
+                <span class="ac-title">Email Address</span>
+                <button class="ac-next-btn" id="ac-gmail-next">Next</button>
+            </div>
+            <div class="ac-body">
+                <div class="ac-icon-wrap"><span class="material-icons" style="font-size:40px;color:#c49a6c;">email</span></div>
+                <p class="ac-step-label">Step 2 of 4 — Gmail Address</p>
+                <input class="ac-input" id="ac-gmail-input" type="email" placeholder="yourname@gmail.com" autocomplete="off">
+                <p class="ac-hint">Enter your Gmail address.</p>
+            </div>
+        </div>
+        <!-- Step 3: Photo (optional) -->
+        <div class="ac-step" id="ac-step-photo">
+            <div class="ac-header">
+                <button class="ac-close-btn" id="ac-photo-back"><span class="material-icons">arrow_back</span></button>
+                <span class="ac-title">Profile Photo</span>
+                <button class="ac-next-btn" id="ac-photo-next">Next</button>
+            </div>
+            <div class="ac-body">
+                <div class="ac-icon-wrap ac-avatar-preview" id="ac-avatar-preview">
+                    <span class="material-icons" style="font-size:48px;color:#bdc1c6;" id="ac-avatar-icon">account_circle</span>
+                    <img id="ac-avatar-img" src="" style="display:none;width:80px;height:80px;border-radius:50%;object-fit:cover;">
+                </div>
+                <p class="ac-step-label">Step 3 of 4 — Photo (Optional)</p>
+                <button class="ac-upload-btn" id="ac-upload-btn">
+                    <span class="material-icons">add_photo_alternate</span> Upload Photo
+                </button>
+                <input type="file" id="ac-photo-file" accept="image/*" hidden>
+                <p class="ac-hint">You can skip this step.</p>
+            </div>
+        </div>
+        <!-- Step 4: Blue tick? -->
+        <div class="ac-step" id="ac-step-tick">
+            <div class="ac-header">
+                <button class="ac-close-btn" id="ac-tick-back"><span class="material-icons">arrow_back</span></button>
+                <span class="ac-title">Blue Tick</span>
+            </div>
+            <div class="ac-body">
+                <div class="ac-icon-wrap"><span class="material-icons" style="font-size:40px;color:#1d9bf0;">verified</span></div>
+                <p class="ac-step-label">Step 4 of 4 — Verification</p>
+                <p class="ac-hint" style="font-size:15px;text-align:center;margin-bottom:24px;">Do you want a blue verified tick next to your name?</p>
+                <div class="ac-tick-btns">
+                    <button class="ac-tick-yes" id="ac-tick-yes">
+                        <span class="material-icons" style="color:#1d9bf0;">verified</span> Yes
+                    </button>
+                    <button class="ac-tick-no" id="ac-tick-no">
+                        <span class="material-icons">close</span> No
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== TO CONTACT MODAL ====== -->
+    <div class="tc-overlay hidden" id="tc-overlay"></div>
+    <div class="tc-modal hidden" id="tc-modal">
+        <!-- Step 1: Name -->
+        <div class="tc-step active" id="tc-step-name">
+            <div class="tc-header">
+                <button class="tc-close-btn" id="tc-name-cancel"><span class="material-icons">close</span></button>
+                <span class="tc-title">Add Recipient</span>
+                <button class="tc-next-btn" id="tc-name-next">Next</button>
+            </div>
+            <div class="tc-body">
+                <div class="tc-icon-wrap"><span class="material-icons" style="font-size:40px;color:#c49a6c;">person_add</span></div>
+                <p class="tc-step-label">Step 1 of 3 — Recipient Name</p>
+                <input class="tc-input" id="tc-name-input" type="text" placeholder="Enter recipient name" autocomplete="off">
+                <p class="tc-hint">Name that will show in the email.</p>
+            </div>
+        </div>
+        <!-- Step 2: Email -->
+        <div class="tc-step" id="tc-step-email">
+            <div class="tc-header">
+                <button class="tc-close-btn" id="tc-email-back"><span class="material-icons">arrow_back</span></button>
+                <span class="tc-title">Recipient Email</span>
+                <button class="tc-next-btn" id="tc-email-next">Next</button>
+            </div>
+            <div class="tc-body">
+                <div class="tc-icon-wrap"><span class="material-icons" style="font-size:40px;color:#c49a6c;">alternate_email</span></div>
+                <p class="tc-step-label">Step 2 of 3 — Email Address</p>
+                <input class="tc-input" id="tc-email-input" type="email" placeholder="recipient@example.com" autocomplete="off">
+                <p class="tc-hint">Email of the recipient.</p>
+            </div>
+        </div>
+        <!-- Step 3: Photo (optional) -->
+        <div class="tc-step" id="tc-step-photo">
+            <div class="tc-header">
+                <button class="tc-close-btn" id="tc-photo-back"><span class="material-icons">arrow_back</span></button>
+                <span class="tc-title">Profile Photo</span>
+                <button class="tc-next-btn" id="tc-photo-done">Done</button>
+            </div>
+            <div class="tc-body">
+                <div class="tc-icon-wrap" id="tc-avatar-preview" style="cursor:pointer;">
+                    <span class="material-icons" style="font-size:48px;color:#bdc1c6;" id="tc-avatar-icon">account_circle</span>
+                    <img id="tc-avatar-img" src="" style="display:none;width:80px;height:80px;border-radius:50%;object-fit:cover;">
+                </div>
+                <p class="tc-step-label">Step 3 of 3 — Photo (Optional)</p>
+                <button class="ac-upload-btn" id="tc-upload-btn">
+                    <span class="material-icons">add_photo_alternate</span> Upload Photo
+                </button>
+                <input type="file" id="tc-photo-file" accept="image/*" hidden>
+                <p class="tc-hint" style="margin-top:8px;">You can skip this step — tap Done.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== ADD EMAIL MODAL (Multi-step: Name→Email→Text→Photo) ====== -->
+    <div class="add-email-overlay hidden" id="add-email-overlay"></div>
+    <div class="add-email-modal hidden" id="add-email-modal">
+        <!-- Step 1: Name -->
+        <div class="ae-step active" id="ae-step-name">
+            <div class="ae-header">
+                <button class="ae-back" id="ae-name-cancel"><span class="material-icons">close</span></button>
+                <span class="ae-title">Add Email</span>
+                <button class="ae-next-btn" id="ae-name-next">Next</button>
+            </div>
+            <div class="ae-body">
+                <div class="ae-icon-wrap">
+                    <span class="material-icons ae-step-icon">person</span>
+                </div>
+                <p class="ae-step-label">Step 1 of 4 — Sender Name</p>
+                <div class="ae-field-wrap">
+                    <input class="ae-input" id="ae-name-input" type="text" placeholder="Enter sender name (e.g. John Doe)" autocomplete="off">
+                </div>
+                <p class="ae-hint">This name will appear in the inbox list.</p>
+            </div>
+        </div>
+        <!-- Step 2: Email -->
+        <div class="ae-step" id="ae-step-email">
+            <div class="ae-header">
+                <button class="ae-back" id="ae-email-back"><span class="material-icons">arrow_back</span></button>
+                <span class="ae-title">Email Address</span>
+                <button class="ae-next-btn" id="ae-email-next">Next</button>
+            </div>
+            <div class="ae-body">
+                <div class="ae-icon-wrap">
+                    <span class="material-icons ae-step-icon">email</span>
+                </div>
+                <p class="ae-step-label">Step 2 of 4 — Email Address</p>
+                <div class="ae-field-wrap">
+                    <input class="ae-input" id="ae-email-input" type="email" placeholder="e.g. john@example.com" autocomplete="off">
+                </div>
+                <p class="ae-hint">Enter the sender's email address.</p>
+            </div>
+        </div>
+        <!-- Step 3: Message Text -->
+        <div class="ae-step" id="ae-step-text">
+            <div class="ae-header">
+                <button class="ae-back" id="ae-text-back"><span class="material-icons">arrow_back</span></button>
+                <span class="ae-title">Message</span>
+                <button class="ae-next-btn" id="ae-text-next">Next</button>
+            </div>
+            <div class="ae-body">
+                <div class="ae-icon-wrap">
+                    <span class="material-icons ae-step-icon">chat</span>
+                </div>
+                <p class="ae-step-label">Step 3 of 4 — Subject & Snippet</p>
+                <div class="ae-field-wrap">
+                    <input class="ae-input" id="ae-subject-input" type="text" placeholder="Subject line" autocomplete="off" style="margin-bottom:12px;">
+                </div>
+                <div class="ae-field-wrap">
+                    <textarea class="ae-input ae-textarea" id="ae-snippet-input" placeholder="Preview text (snippet)..." rows="3"></textarea>
+                </div>
+                <p class="ae-hint">This appears as the email preview in the inbox.</p>
+            </div>
+        </div>
+        <!-- Step 4: Photo -->
+        <div class="ae-step" id="ae-step-photo">
+            <div class="ae-header">
+                <button class="ae-back" id="ae-photo-back"><span class="material-icons">arrow_back</span></button>
+                <span class="ae-title">Profile Photo</span>
+                <button class="ae-next-btn ae-done-btn" id="ae-photo-done">Add Email</button>
+            </div>
+            <div class="ae-body ae-photo-body">
+                <div class="ae-icon-wrap">
+                    <span class="material-icons ae-step-icon">add_a_photo</span>
+                </div>
+                <p class="ae-step-label">Step 4 of 4 — Sender Avatar</p>
+                <!-- Preview card -->
+                <div class="ae-preview-card" id="ae-preview-card">
+                    <div class="ae-preview-avatar" id="ae-preview-avatar">
+                        <span class="material-icons" style="font-size:28px; color:#bdc1c6;">account_circle</span>
+                    </div>
+                    <div class="ae-preview-info">
+                        <div class="ae-preview-name" id="ae-preview-name">—</div>
+                        <div class="ae-preview-email" id="ae-preview-email-display">—</div>
+                    </div>
+                    <div class="ae-verified-toggle" id="ae-verified-toggle" title="Add blue tick">
+                        <span class="material-icons ae-tick-icon" id="ae-tick-icon">verified</span>
+                    </div>
+                </div>
+                <p class="ae-photo-hint">Tap avatar to upload photo. Tap ✓ for blue tick.</p>
+                <!-- Upload trigger -->
+                <div class="ae-upload-area" id="ae-upload-area">
+                    <span class="material-icons" style="font-size:32px; color:var(--text-secondary);">add_photo_alternate</span>
+                    <span style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Upload photo (optional)</span>
+                </div>
+                <input type="file" id="ae-photo-file" accept="image/*" hidden>
+            </div>
+        </div>
+        <!-- Step 5: Success -->
+        <div class="ae-step" id="ae-step-success">
+            <div class="ae-header">
+                <span class="ae-title" style="flex:1; text-align:center;">Email Added!</span>
+            </div>
+            <div class="ae-body ae-success-body">
+                <div class="ae-success-avatar" id="ae-success-avatar"></div>
+                <div class="ae-success-name" id="ae-success-name"></div>
+                <div class="ae-success-email" id="ae-success-email"></div>
+                <div class="ae-success-tick hidden" id="ae-success-tick">
+                    <span class="material-icons" style="color:#1d9bf0; font-size:20px;">verified</span>
+                    Verified
+                </div>
+                <button class="ae-done-final" id="ae-done-final">Go to Inbox</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="compose-modal hidden" id="compose-modal">
+        <div class="compose-header" id="compose-header">
+            <span class="compose-title">New Message</span>
+            <div class="compose-header-actions">
+                <button class="icon-btn compose-minimize-btn" id="compose-minimize-btn" aria-label="Minimize">
+                    <span class="material-icons">minimize</span>
+                </button>
+                <button class="icon-btn compose-fullscreen-btn" id="compose-fullscreen-btn" aria-label="Full screen">
+                    <span class="material-icons-outlined">open_in_full</span>
+                </button>
+                <button class="icon-btn compose-close-btn" id="compose-close-btn" aria-label="Close">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+        </div>
+        <div class="compose-body" id="compose-body">
+            <div class="compose-field">
+                <label class="compose-field-label">To</label>
+                <input type="email" class="compose-field-input" id="compose-to" autocomplete="off">
+                <div class="compose-cc-bcc">
+                    <button class="compose-cc-btn" id="compose-cc-toggle">Cc</button>
+                    <button class="compose-bcc-btn" id="compose-bcc-toggle">Bcc</button>
+                </div>
+            </div>
+            <div class="compose-field compose-cc-field hidden" id="compose-cc-field">
+                <label class="compose-field-label">Cc</label>
+                <input type="email" class="compose-field-input" id="compose-cc" autocomplete="off">
+            </div>
+            <div class="compose-field compose-bcc-field hidden" id="compose-bcc-field">
+                <label class="compose-field-label">Bcc</label>
+                <input type="email" class="compose-field-input" id="compose-bcc" autocomplete="off">
+            </div>
+            <div class="compose-field subject-field">
+                <input type="text" class="compose-field-input subject-input" id="compose-subject" placeholder="Subject" autocomplete="off">
+            </div>
+            <div class="compose-editor" id="compose-editor" contenteditable="true" role="textbox" aria-label="Message body"></div>
+        </div>
+        <div class="compose-footer" id="compose-footer">
+            <div class="compose-footer-left">
+                <button class="send-btn" id="send-btn">
+                    <span>Send</span>
+                    <span class="material-icons send-arrow">arrow_drop_down</span>
+                </button>
+                <div class="compose-toolbar">
+                    <button class="icon-btn compose-tool-btn" aria-label="Formatting"><span class="material-icons-outlined">text_format</span></button>
+                    <button class="icon-btn compose-tool-btn" aria-label="Attach"><span class="material-icons-outlined">attach_file</span></button>
+                    <button class="icon-btn compose-tool-btn" aria-label="Insert link"><span class="material-icons-outlined">insert_link</span></button>
+                    <button class="icon-btn compose-tool-btn" aria-label="Insert emoji"><span class="material-icons-outlined">mood</span></button>
+                    <button class="icon-btn compose-tool-btn" aria-label="Insert Drive"><span class="material-icons-outlined">add_to_drive</span></button>
+                    <button class="icon-btn compose-tool-btn" aria-label="Insert photo"><span class="material-icons-outlined">insert_photo</span></button>
+                    <button class="icon-btn compose-tool-btn" aria-label="Toggle confidential"><span class="material-icons-outlined">lock</span></button>
+                    <button class="icon-btn compose-tool-btn" aria-label="Insert signature"><span class="material-icons-outlined">draw</span></button>
+                </div>
+            </div>
+            <div class="compose-footer-right">
+                <button class="icon-btn compose-tool-btn" id="compose-more-btn" aria-label="More options"><span class="material-icons-outlined">more_vert</span></button>
+                <button class="icon-btn compose-tool-btn" id="compose-delete-btn" aria-label="Discard draft"><span class="material-icons-outlined">delete</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== TOAST NOTIFICATION ====== -->
+    <div class="toast hidden" id="toast">
+        <span class="toast-message" id="toast-message"></span>
+        <button class="toast-action" id="toast-action">Undo</button>
+    </div>
+    <!-- ====== ACCOUNT MODAL ====== -->
+    <div class="account-modal-backdrop hidden" id="account-backdrop"></div>
+    <div class="account-modal hidden" id="account-modal">
+        <!-- Header: email centered, X on right -->
+        <div class="account-modal-header">
+            <div class="account-email">kaassr22@gmail.com</div>
+            <button class="icon-btn close-btn" id="account-close-btn"><span class="material-icons">close</span></button>
+        </div>
+
+        <!-- Profile: avatar with camera badge -->
+        <div class="account-profile">
+            <div class="account-avatar-wrapper">
+                <div class="account-avatar-large" id="main-account-avatar">R</div>
+                <div class="account-avatar-camera" id="account-avatar-camera" title="Change profile photo" style="cursor:pointer;">
+                    <span class="material-icons">photo_camera</span>
+                </div>
+                <input type="file" id="profile-photo-input" accept="image/*" hidden>
+            </div>
+            <div class="account-name">Hi, RANCHO!</div>
+            <button class="manage-account-btn">Manage your Google Account</button>
+        </div>
+        
+        <!-- Switch Account section -->
+        <div class="switch-account-section">
+            <div class="switch-account-header" id="switch-account-toggle">
+                <span>Switch account</span>
+                <span class="material-icons switch-arrow" id="switch-arrow">expand_less</span>
+            </div>
+            <div class="account-list" id="account-list">
+                <!-- Dynamically rendered by JS -->
+            </div>
+        </div>
+
+        <div class="account-actions">
+            <div class="account-action-item" id="add-account-btn">
+                <span class="material-icons-outlined">person_add</span>
+                <span>Add another account</span>
+            </div>
+            <div class="account-action-item">
+                <span class="material-icons-outlined">manage_accounts</span>
+                <span>Manage accounts on this device</span>
+            </div>
+        </div>
+
+        <div class="account-footer">
+            <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a>
+        </div>
+    </div>
+
+    <!-- ====== ADD ACCOUNT FORM MODAL ====== -->
+    <div class="add-account-modal hidden" id="add-account-modal">
+        <div class="add-account-header">
+            <button class="icon-btn" id="add-account-back-btn"><span class="material-icons">arrow_back</span></button>
+            <span class="add-account-title">Add account</span>
+        </div>
+        
+        <div class="add-account-body">
+            <div class="add-account-icon">
+                <span class="material-icons-outlined">account_circle</span>
+            </div>
+            <h2 class="add-account-heading">Sign in to Gmail</h2>
+            <p class="add-account-subtext">Enter your account details to continue</p>
+
+            <div class="add-account-form" id="add-account-form">
+                <!-- Step 1: Name -->
+                <div class="form-step active" id="step-name">
+                    <div class="form-field">
+                        <input type="text" class="form-input" id="acc-name-input" placeholder=" " autocomplete="off" required>
+                        <label class="form-label">Full Name</label>
+                    </div>
+                    <div class="form-hint">Enter your full name as it should appear on the account.</div>
+                    <div class="form-buttons">
+                        <button class="form-btn-text" id="step-name-cancel">Cancel</button>
+                        <button class="form-btn-filled" id="step-name-next">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Email -->
+                <div class="form-step" id="step-email">
+                    <div class="form-field">
+                        <input type="email" class="form-input" id="acc-email-input" placeholder=" " autocomplete="off" required>
+                        <label class="form-label">Email address</label>
+                    </div>
+                    <div class="form-hint">Enter the email address for this account.</div>
+                    <div class="form-buttons">
+                        <button class="form-btn-text" id="step-email-back">Back</button>
+                        <button class="form-btn-filled" id="step-email-next">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Photo (Optional) -->
+                <div class="form-step" id="step-photo">
+                    <div class="photo-upload-area" id="photo-upload-area">
+                        <div class="photo-preview" id="photo-preview">
+                            <span class="material-icons-outlined">add_a_photo</span>
+                        </div>
+                        <p class="photo-text">Add a profile photo</p>
+                        <p class="photo-hint">(Optional)</p>
+                        <input type="file" id="acc-photo-input" accept="image/*" hidden>
+                    </div>
+                    <div class="form-buttons">
+                        <button class="form-btn-text" id="step-photo-skip">Skip</button>
+                        <button class="form-btn-filled" id="step-photo-done">Add account</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Success -->
+                <div class="form-step" id="step-success">
+                    <div class="success-icon">
+                        <span class="material-icons">check_circle</span>
+                    </div>
+                    <h3 class="success-text">Account added successfully!</h3>
+                    <p class="success-sub" id="success-email-text"></p>
+                    <div class="form-buttons">
+                        <button class="form-btn-filled" id="step-success-done">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app_v42.js"></script>
+    <script src="pwa.js?v=52"></script>
+</body>
+</html>

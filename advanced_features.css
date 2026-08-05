@@ -1,0 +1,290 @@
+/* ============================================
+   SEND / RECEIVE POPUP
+   ============================================ */
+.sr-popup {
+    position: fixed;
+    top: 56px;
+    right: 8px;
+    background: #1e1611;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    z-index: 800;
+    overflow: hidden;
+    min-width: 210px;
+    border: 1px solid #2a241f;
+}
+.sr-popup.hidden { display: none !important; }
+.sr-popup-arrow {
+    position: absolute;
+    top: -8px;
+    right: 24px;
+    width: 16px;
+    height: 8px;
+    overflow: visible;
+}
+.sr-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 16px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 15px;
+    text-align: left;
+    transition: background 0.15s;
+}
+.sr-option:hover { background: rgba(255,255,255,0.06); }
+.sr-option .material-icons { font-size: 22px; color: #c49a6c; flex-shrink: 0; }
+.sr-option-text { display: flex; flex-direction: column; gap: 2px; }
+.sr-option-title { font-size: 15px; font-weight: 500; color: var(--text-primary); }
+.sr-option-desc { font-size: 12px; color: var(--text-secondary); }
+.sr-divider { height: 1px; background: #2a241f; margin: 0; }
+
+/* ============================================
+   DATE TIME MODAL
+   ============================================ */
+.dt-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 850;
+    backdrop-filter: blur(2px);
+}
+.dt-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1e1611;
+    border-radius: 20px 20px 0 0;
+    z-index: 860;
+    padding: 0 0 32px 0;
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+    border-top: 1px solid #2a241f;
+}
+.dt-modal.hidden, .dt-overlay.hidden { display: none !important; }
+.dt-header {
+    padding: 20px 24px 12px;
+    border-bottom: 1px solid #2a241f;
+}
+.dt-title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+}
+.dt-body { padding: 16px 24px; display: flex; flex-direction: column; gap: 16px; }
+.dt-row { display: flex; align-items: center; gap: 16px; }
+.dt-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    min-width: 48px;
+    font-family: var(--font-main);
+}
+.dt-input {
+    flex: 1;
+    background: #2a241f;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text-primary);
+    font-size: 15px;
+    font-family: var(--font-main);
+    outline: none;
+    color-scheme: dark;
+}
+.dt-actions {
+    display: flex;
+    gap: 12px;
+    padding: 8px 24px 0;
+    justify-content: flex-end;
+}
+.dt-cancel-btn {
+    padding: 10px 24px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-family: var(--font-main);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.15s;
+}
+.dt-cancel-btn:hover { background: rgba(255,255,255,0.06); }
+.dt-confirm-btn {
+    padding: 10px 24px;
+    border: none;
+    background: #5c3a21;
+    color: #ebd1b7;
+    font-size: 14px;
+    font-family: var(--font-main);
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.15s;
+}
+.dt-confirm-btn:hover { background: #7a4d2a; }
+
+/* ============================================
+   ADD ACCOUNT MODAL (shared style with ae-modal)
+   ============================================ */
+.ac-overlay, .tc-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 900;
+    backdrop-filter: blur(3px);
+}
+.ac-overlay.hidden, .tc-overlay.hidden { display: none !important; }
+
+.ac-modal, .tc-modal {
+    position: fixed;
+    inset: 0;
+    background: #130e0c;
+    z-index: 910;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-main);
+}
+.ac-modal.hidden, .tc-modal.hidden { display: none !important; }
+
+.ac-step, .tc-step { display: none; flex-direction: column; height: 100%; }
+.ac-step.active, .tc-step.active { display: flex; }
+
+.ac-header, .tc-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 8px 8px 8px;
+    height: 56px;
+    flex-shrink: 0;
+    border-bottom: 1px solid #2a241f;
+}
+.ac-close-btn, .tc-close-btn {
+    width: 44px; height: 44px;
+    border: none; background: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-primary);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.ac-close-btn .material-icons, .tc-close-btn .material-icons { font-size: 24px; }
+.ac-title, .tc-title {
+    flex: 1;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+.ac-next-btn, .tc-next-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #c49a6c;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font-main);
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.15s;
+}
+.ac-next-btn:hover, .tc-next-btn:hover { background: rgba(196,154,108,0.1); }
+
+.ac-body, .tc-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 24px;
+    overflow-y: auto;
+}
+.ac-icon-wrap, .tc-icon-wrap {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(196,154,108,0.1);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+}
+.ac-step-label, .tc-step-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0 0 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.ac-input, .tc-input {
+    width: 100%;
+    background: #1e1611;
+    border: 1px solid #2a241f;
+    border-radius: 12px;
+    padding: 16px;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: var(--font-main);
+    outline: none;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+.ac-input:focus, .tc-input:focus { border-color: #c49a6c; }
+.ac-hint, .tc-hint {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+}
+.ac-upload-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #2a241f;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    color: var(--text-primary);
+    font-size: 15px;
+    font-family: var(--font-main);
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: background 0.15s;
+}
+.ac-upload-btn:hover { background: #3a3128; }
+.ac-tick-btns {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+    width: 100%;
+    justify-content: center;
+}
+.ac-tick-yes, .ac-tick-no {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 28px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font-main);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.ac-tick-yes {
+    background: rgba(29,155,240,0.15);
+    color: #1d9bf0;
+    border: 1.5px solid #1d9bf0;
+}
+.ac-tick-no {
+    background: #2a241f;
+    color: var(--text-secondary);
+    border: 1.5px solid #3a3128;
+}
+.ac-tick-yes:hover, .ac-tick-no:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+
+.ac-avatar-preview {
+    position: relative;
+    cursor: pointer;
+}
