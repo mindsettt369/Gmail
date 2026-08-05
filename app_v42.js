@@ -617,7 +617,6 @@ function renderEmailDetail(email) {
         ">
             <div>
                 ${email.subject}
-                ${email.folder === 'inbox' ? '<span style="background:transparent; color:#e3e3e3; font-size:12px; font-weight:400; padding:2px 10px; border:1px solid #5f6368; border-radius:6px; vertical-align:middle; margin-left:8px; display:inline-block; transform:translateY(-2px); white-space:nowrap;">Add label</span>' : ''}
             </div>
             <span class="material-icons-outlined" style="color:#9aa0a6; cursor:pointer; flex-shrink:0; margin-top:4px; font-size:22px;">star_border</span>
         </h1>
