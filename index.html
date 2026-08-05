@@ -10,7 +10,7 @@
     <title>Gmail Clone</title>
     <script>
       // NUCLEAR CACHE BUSTER — forces reload for all workers automatically
-      var APP_VERSION = 'v59-remove-splash';
+      var APP_VERSION = 'v60-restore-splash';
       var storedVersion = localStorage.getItem('app_version');
       
       // Auto-reload when a new service worker takes over! (Crucial for workers who don't clear cache)
@@ -54,7 +54,25 @@
     <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 </head>
 <body>
-
+    <!-- Splash Screen -->
+    <div id="app-splash" style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--warm-050); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 0.4s ease;">
+        <!-- Container for logo -->
+        <div style="flex:1; display:flex; align-items:center; justify-content:center;">
+            <!-- M Logo with official colors -->
+            <svg width="84" height="84" viewBox="52 42 88 66" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/>
+                <path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/>
+                <path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/>
+                <path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/>
+                <path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/>
+            </svg>
+        </div>
+        
+        <!-- Bottom text -->
+        <div style="margin-bottom:48px; display:flex; flex-direction:column; align-items:center;">
+            <div style="font-family:'Google Sans', sans-serif; font-size:16px; color:var(--text-primary); opacity:0.9;">Google Workspace</div>
+        </div>
+    </div>
     <!-- ====== HEADER ====== -->
 
     <header class="header" id="main-header">
