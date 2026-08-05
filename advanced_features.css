@@ -5,13 +5,13 @@
     position: fixed;
     top: 56px;
     right: 8px;
-    background: #1e1611;
+    background: var(--warm-100);
     border-radius: 14px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.6);
     z-index: 800;
     overflow: hidden;
     min-width: 210px;
-    border: 1px solid #2a241f;
+    border: 1px solid var(--warm-300);
 }
 .sr-popup.hidden { display: none !important; }
 .sr-popup-arrow {
@@ -38,11 +38,11 @@
     transition: background 0.15s;
 }
 .sr-option:hover { background: rgba(255,255,255,0.06); }
-.sr-option .material-icons { font-size: 22px; color: #c49a6c; flex-shrink: 0; }
+.sr-option .material-icons { font-size: 22px; color: var(--amber-link); flex-shrink: 0; }
 .sr-option-text { display: flex; flex-direction: column; gap: 2px; }
 .sr-option-title { font-size: 15px; font-weight: 500; color: var(--text-primary); }
 .sr-option-desc { font-size: 12px; color: var(--text-secondary); }
-.sr-divider { height: 1px; background: #2a241f; margin: 0; }
+.sr-divider { height: 1px; background: var(--warm-300); margin: 0; }
 
 /* ============================================
    DATE TIME MODAL
@@ -59,17 +59,17 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: #1e1611;
+    background: var(--warm-100);
     border-radius: 20px 20px 0 0;
     z-index: 860;
     padding: 0 0 32px 0;
     box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
-    border-top: 1px solid #2a241f;
+    border-top: 1px solid var(--warm-300);
 }
 .dt-modal.hidden, .dt-overlay.hidden { display: none !important; }
 .dt-header {
     padding: 20px 24px 12px;
-    border-bottom: 1px solid #2a241f;
+    border-bottom: 1px solid var(--warm-300);
 }
 .dt-title {
     font-size: 17px;
@@ -87,7 +87,7 @@
 }
 .dt-input {
     flex: 1;
-    background: #2a241f;
+    background: var(--warm-300);
     border: none;
     border-radius: 10px;
     padding: 12px 16px;
@@ -118,8 +118,8 @@
 .dt-confirm-btn {
     padding: 10px 24px;
     border: none;
-    background: #5c3a21;
-    color: #ebd1b7;
+    background: var(--amber-container);
+    color: var(--amber-on-container);
     font-size: 14px;
     font-family: var(--font-main);
     font-weight: 600;
@@ -127,7 +127,7 @@
     border-radius: 8px;
     transition: background 0.15s;
 }
-.dt-confirm-btn:hover { background: #7a4d2a; }
+.dt-confirm-btn:hover { background: var(--warm-500); }
 
 /* ============================================
    ADD ACCOUNT MODAL (shared style with ae-modal)
@@ -144,7 +144,7 @@
 .ac-modal, .tc-modal {
     position: fixed;
     inset: 0;
-    background: #130e0c;
+    background: var(--warm-000);
     z-index: 910;
     display: flex;
     flex-direction: column;
@@ -161,7 +161,7 @@
     padding: 8px 8px 8px 8px;
     height: 56px;
     flex-shrink: 0;
-    border-bottom: 1px solid #2a241f;
+    border-bottom: 1px solid var(--warm-300);
 }
 .ac-close-btn, .tc-close-btn {
     width: 44px; height: 44px;
@@ -183,7 +183,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: #c49a6c;
+    color: var(--amber-link);
     font-size: 15px;
     font-weight: 600;
     font-family: var(--font-main);
@@ -191,7 +191,7 @@
     border-radius: 8px;
     transition: background 0.15s;
 }
-.ac-next-btn:hover, .tc-next-btn:hover { background: rgba(196,154,108,0.1); }
+.ac-next-btn:hover, .tc-next-btn:hover { background: rgba(232,196,142,0.1); }
 
 .ac-body, .tc-body {
     flex: 1;
@@ -204,7 +204,7 @@
 .ac-icon-wrap, .tc-icon-wrap {
     width: 80px; height: 80px;
     border-radius: 50%;
-    background: rgba(196,154,108,0.1);
+    background: rgba(232,196,142,0.1);
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 20px;
 }
@@ -217,8 +217,8 @@
 }
 .ac-input, .tc-input {
     width: 100%;
-    background: #1e1611;
-    border: 1px solid #2a241f;
+    background: var(--warm-100);
+    border: 1px solid var(--warm-300);
     border-radius: 12px;
     padding: 16px;
     color: var(--text-primary);
@@ -229,7 +229,7 @@
     transition: border-color 0.2s;
     box-sizing: border-box;
 }
-.ac-input:focus, .tc-input:focus { border-color: #c49a6c; }
+.ac-input:focus, .tc-input:focus { border-color: var(--amber-link); }
 .ac-hint, .tc-hint {
     font-size: 13px;
     color: var(--text-secondary);
@@ -240,7 +240,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #2a241f;
+    background: var(--warm-300);
     border: none;
     border-radius: 12px;
     padding: 14px 24px;
@@ -251,7 +251,7 @@
     margin-bottom: 16px;
     transition: background 0.15s;
 }
-.ac-upload-btn:hover { background: #3a3128; }
+.ac-upload-btn:hover { background: var(--warm-400); }
 .ac-tick-btns {
     display: flex;
     gap: 16px;
@@ -278,9 +278,9 @@
     border: 1.5px solid #1d9bf0;
 }
 .ac-tick-no {
-    background: #2a241f;
+    background: var(--warm-300);
     color: var(--text-secondary);
-    border: 1.5px solid #3a3128;
+    border: 1.5px solid var(--warm-400);
 }
 .ac-tick-yes:hover, .ac-tick-no:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
 

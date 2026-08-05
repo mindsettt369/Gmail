@@ -13,10 +13,10 @@ const AVATAR_COLORS = [
 ];
 
 const LABEL_COLORS = {
-    work: { bg: '#d3e3fd', text: '#1a73e8' },
-    personal: { bg: '#ceead6', text: '#188038' },
-    finance: { bg: '#fef7e0', text: '#b06000' },
-    travel: { bg: '#fce8e6', text: '#c5221f' },
+    work: { bg: 'var(--amber-container)', text: 'var(--amber-on-container)' },
+    personal: { bg: 'var(--warm-300)', text: 'var(--amber-link)' },
+    finance: { bg: 'var(--tan-pill)', text: 'var(--tan-on-pill)' },
+    travel: { bg: 'var(--amber-container)', text: 'var(--amber-on-container)' },
 };
 
 function randomAvatarColor(name) {
@@ -33,10 +33,11 @@ const emails = [
         senderCount: null,
         email: 'noreply@hostinger.com',
         subject: 'Your Starter Business Email pla…',
+        fullSubject: 'Your Starter Business Email plan is ready',
         snippet: 'Act now',
         body: `<p>Your Starter Business Email plan is waiting for you. Act now to get started with professional email hosting from Hostinger.</p>`,
-        date: '30 Jul',
-        fullDate: 'Jul 30, 2026, 11:17 AM',
+        date: '5 Aug',
+        fullDate: 'Aug 5, 2026, 11:17 AM',
         unread: true, starred: false, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'hostinger',
@@ -47,10 +48,11 @@ const emails = [
         senderCount: null,
         email: 'ant.wilson@supabase.com',
         subject: 'Your Supabase Project mindexis i…',
+        fullSubject: 'Your Supabase Project mindexis is using excess resources',
         snippet: 'Hi there, To save on cloud resour…',
         body: `<p>Hi there,</p><p>To save on cloud resources, we recommend upgrading your Supabase project mindexis. This will help optimize performance and reduce costs significantly.</p>`,
-        date: '29 Jul',
-        fullDate: 'Jul 29, 2026, 10:33 AM',
+        date: '4 Aug',
+        fullDate: 'Aug 4, 2026, 10:33 AM',
         unread: false, starred: false, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'default',
@@ -95,10 +97,11 @@ const emails = [
         senderCount: null,
         email: 'invoicing@aws.com',
         subject: 'Amazon Web Services GST Invoic…',
+        fullSubject: 'Amazon Web Services GST Invoice for July 2026',
         snippet: 'AWS logo Greetings from Amazon…',
         body: `<p>Greetings from Amazon Web Services. Please find your GST invoice attached for this billing period.</p>`,
-        date: '28 Jul',
-        fullDate: 'Jul 28, 2026, 10:30 AM',
+        date: '2 Aug',
+        fullDate: 'Aug 2, 2026, 10:30 AM',
         unread: true, starred: false, important: false,
         labels: [], hasAttachment: true,
         avatarType: 'default',
@@ -109,10 +112,11 @@ const emails = [
         senderCount: null,
         email: 'noreply@bitget.com',
         subject: 'Bitget CFD Weekly: How to Trade…',
+        fullSubject: 'Bitget CFD Weekly: How to Trade Market Volatility',
         snippet: 'Dear Bitget users: This week\'s un…',
         body: `<p>Dear Bitget users,</p><p>This week's update brings exciting new trading features and market insights for CFD traders.</p>`,
-        date: '27 Jul',
-        fullDate: 'Jul 27, 2026, 9:15 AM',
+        date: '1 Aug',
+        fullDate: 'Aug 1, 2026, 9:15 AM',
         unread: false, starred: false, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'default',
@@ -123,6 +127,7 @@ const emails = [
         senderCount: null,
         email: 'business@meta.com',
         subject: 'Verification successful for ETERNI…',
+        fullSubject: 'Verification successful for ETERNITY TRADING COMPANY',
         snippet: 'ETERNITY TRADING COMPANY P…',
         body: `<p>Verification successful for ETERNITY TRADING COMPANY. Your business has been verified on Meta.</p>`,
         date: '25 Jul',
@@ -139,8 +144,8 @@ const emails = [
         subject: 'Re: Project Update',
         snippet: 'Thanks for the update, will review...',
         body: `<p>Thanks for the update, will review and get back to you.</p>`,
-        date: '28 Jul',
-        fullDate: 'Jul 28, 2026, 9:45 AM',
+        date: '30 Jul',
+        fullDate: 'Jul 30, 2026, 9:45 AM',
         unread: false, starred: false, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'default',
@@ -153,8 +158,8 @@ const emails = [
         subject: 'Your domain is expiring soon',
         snippet: 'Renew now to keep your domain active...',
         body: `<p>Your domain is expiring soon. Renew now to keep your domain active.</p>`,
-        date: '25 Jul',
-        fullDate: 'Jul 25, 2026, 3:45 PM',
+        date: '24 Jul',
+        fullDate: 'Jul 24, 2026, 3:45 PM',
         unread: false, starred: true, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'hostinger',
@@ -319,7 +324,7 @@ function updateCounts() {
 //  RENDER: Avatar HTML
 // ============================================
 function renderAvatarHTML(email, isMobile = false, isDetail = false) {
-    const size = isDetail ? 48 : (isMobile ? 40 : 40);
+    const size = isDetail ? 64 : (isMobile ? 52 : 40);
     
     if (email.avatarType === 'wati') {
         return `<div class="mobile-avatar" style="background:#25d366; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
@@ -329,32 +334,29 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
         </div>`;
     }
     if (email.avatarType === 'facebook') {
-        return `<div class="mobile-avatar" style="background:#1877F2; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+        return `<div class="mobile-avatar" style="background:#1877F2; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;">
+            <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="white">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
         </div>`;
     }
     if (email.avatarType === 'hostinger') {
-        // Exact Hostinger brand: white circle, dark navy/purple rounded square, white H (two verticals + cross bar)
-        return `<div class="mobile-avatar" style="background:#ffffff; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-                <rect width="26" height="26" rx="6" fill="#2d1b6b"/>
-                <rect x="6" y="7" width="4" height="12" rx="1" fill="white"/>
-                <rect x="16" y="7" width="4" height="12" rx="1" fill="white"/>
-                <rect x="6" y="11" width="14" height="4" rx="1" fill="white"/>
+        // Hostinger brand mark: white circle with violet "H" (slanted crossbar)
+        return `<div class="mobile-avatar" style="background:#ffffff; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;">
+            <svg width="${Math.round(size * 0.62)}" height="${Math.round(size * 0.62)}" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+                <path fill="#673DE6" d="M4 4h5v8.6l8-2.6V4h5v18h-5v-8.6l-8 2.6V22H4z"/>
             </svg>
         </div>`;
     }
     if (email.avatarType === 'updates') {
         return `<div class="mobile-avatar" style="background:transparent; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <span class="material-icons-outlined" style="font-size:24px; color:#e37400;">info</span>
+            <span class="material-icons-outlined" style="font-size:30px; color:var(--amber-link);">info</span>
         </div>`;
     }
     if (email.avatarType === 'initial') {
         const initial = email.sender.charAt(0).toUpperCase();
         const bg = email.avatarColor || randomAvatarColor(email.sender);
-        return `<div class="mobile-avatar" style="background:${bg}; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:white; font-size:18px; font-weight:600; font-family:var(--font-main);">
+        return `<div class="mobile-avatar" style="background:${bg}; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:white; font-size:${Math.round(size * 0.45)}px; font-weight:600; font-family:var(--font-main);">
             ${initial}
         </div>`;
     }
@@ -365,7 +367,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     }
     if (email.avatarType === 'promotions') {
         return `<div class="mobile-avatar" style="background:transparent; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <span class="material-icons-outlined" style="font-size:24px; color:#1e8e3e;">local_offer</span>
+            <span class="material-icons-outlined" style="font-size:30px; color:var(--amber-link);">local_offer</span>
         </div>`;
     }
     if (email.avatarType === 'social') {
@@ -376,7 +378,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     if (email.avatarType === 'default') {
         // Gmail-style: grey circle, person silhouette anchored to bottom
         return `<div class="mobile-avatar" style="background:#5f6368; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:flex-end; justify-content:center; flex-shrink:0; overflow:hidden;">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="#bdc1c6" style="margin-bottom:-2px;">
+            <svg width="${Math.round(size * 0.78)}" height="${Math.round(size * 0.78)}" viewBox="0 0 24 24" fill="var(--text-tertiary)" style="margin-bottom:-2px;">
                 <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
             </svg>
         </div>`;
@@ -384,7 +386,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     // Fallback — colored initial
     const avatarColor = randomAvatarColor(email.sender);
     const initial = email.sender.charAt(0).toUpperCase();
-    return `<div class="mobile-avatar" style="background:${avatarColor}; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:white; font-size:18px; font-weight:600; font-family:var(--font-main);">
+    return `<div class="mobile-avatar" style="background:${avatarColor}; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:white; font-size:${Math.round(size * 0.44)}px; font-weight:500; font-family:var(--font-main); line-height:1;">
         ${initial}
     </div>`;
 }
@@ -402,7 +404,7 @@ function renderEmailList() {
             <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:60vh;padding-top:10vh;color:var(--text-tertiary);gap:16px;">
                 <span class="material-icons-outlined" style="font-size:80px;color:var(--text-tertiary);">markunread_mailbox</span>
                 <div style="font-family:var(--font-main);font-size:18px;color:var(--text-primary);font-weight:400;">Nothing here yet</div>
-                <div style="font-size:13px;color:var(--text-secondary);">Emails for this view will show up here</div>
+                <div style="font-size:15px;color:var(--text-secondary);">Emails for this view will show up here</div>
             </div>
         `;
         return;
@@ -433,7 +435,7 @@ function renderMobileEmailList(filtered) {
     let html = '';
 
     // "Primary" section label
-    html += `<div style="padding:16px 16px 8px 16px; font-size:14px; color:#e3e3e3; font-weight:400; letter-spacing:0.2px;">Primary</div>`;
+    html += `<div style="padding:20px 20px 10px 20px; font-size:17px; color:var(--text-primary); font-weight:400; letter-spacing:0.2px;">Primary</div>`;
 
     // First 2 primary emails (most recent)
     const firstTwo = primaryEmails.slice(0, 2);
@@ -459,27 +461,27 @@ function renderMobileEmailList(filtered) {
 function renderMobileCategoryRow(email) {
     let iconHtml, badgeStyle;
     if (email.avatarType === 'updates') {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:24px; color:#e37400;">info</span>`;
-        badgeStyle = 'background:#e37400; color:#1a1210;';
+        iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:var(--amber-link);">info</span>`;
+        badgeStyle = 'background:var(--tan-pill); color:var(--tan-on-pill);';
     } else if (email.avatarType === 'promotions') {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:24px; color:#1e8e3e;">local_offer</span>`;
-        badgeStyle = 'background:#1e8e3e; color:#fff;';
+        iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:var(--amber-link);">local_offer</span>`;
+        badgeStyle = 'background:var(--amber-container); color:var(--amber-on-container);';
     } else {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:24px; color:var(--text-secondary);">people</span>`;
-        badgeStyle = email.badgeColor === 'orange' ? 'background:#e37400; color:#fff;' : 'background:#1a73e8; color:#fff;';
+        iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:var(--text-secondary);">people</span>`;
+        badgeStyle = email.badgeColor === 'orange' ? 'background:var(--amber-container); color:var(--amber-on-container);' : 'background:var(--amber-container); color:var(--amber-on-container);';
     }
 
     return `
     <div class="email-row mobile-category-row" data-email-id="${email.id}" style="animation-delay:0s">
-        <div class="mobile-avatar" style="background:transparent; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        <div class="mobile-avatar" style="background:transparent; width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
             ${iconHtml}
         </div>
-        <div style="flex:1; min-width:0; margin-left:16px;">
-            <div style="font-size:16px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${email.sender}</div>
-            <div style="font-size:14px; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px;">${email.subject}</div>
+        <div style="flex:1; min-width:0; margin-left:18px;">
+            <div style="font-size:18px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:24px;">${email.sender}</div>
+            <div style="font-size:16px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:3px; line-height:22px;">${email.subject}</div>
         </div>
-        <div style="flex-shrink:0; margin-left:8px;">
-            <span style="display:inline-block; padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600; ${badgeStyle}">${email.badgeCount}</span>
+        <div style="flex-shrink:0; margin-left:10px;">
+            <span style="display:inline-block; padding:5px 12px; border-radius:20px; font-size:14px; font-weight:600; ${badgeStyle}">${email.badgeCount}</span>
         </div>
     </div>`;
 }
@@ -498,14 +500,14 @@ function renderMobileEmailRow(email, i) {
             ${senderDisplay}
         </div>
         <div class="email-date" style="grid-area:date;">
-            ${email.date ? `${email.date}${isUnread ? ' <span style="color:#ebd1b7; font-size:8px; margin-left:4px; vertical-align:middle;">●</span>' : ''}` : ''}
+            ${email.date ? `${email.date}${isUnread ? ' <span style="color:var(--amber-link); font-size:10px; margin-left:5px; vertical-align:middle;">●</span>' : ''}` : ''}
         </div>
         <div class="email-content" style="grid-area:content;">
             <span class="email-subject">${email.subject}</span>
             <span class="email-snippet">${email.snippet}</span>
         </div>
-        <div class="mobile-star ${email.starred ? 'starred' : ''}" data-star-id="${email.id}" onclick="event.stopPropagation()" style="grid-area:star; align-self:flex-end; margin-top:8px;">
-            <span class="${email.starred ? 'material-icons' : 'material-icons-outlined'}" style="font-size:20px; color:${email.starred ? '#f9ab00' : 'var(--text-tertiary)'};">
+        <div class="mobile-star ${email.starred ? 'starred' : ''}" data-star-id="${email.id}" onclick="event.stopPropagation()" style="grid-area:star; align-self:flex-end; margin-top:10px;">
+            <span class="${email.starred ? 'material-icons' : 'material-icons-outlined'}" style="font-size:26px; color:${email.starred ? '#f9ab00' : 'var(--text-tertiary)'};">
                 ${email.starred ? 'star' : 'star_border'}
             </span>
         </div>
@@ -588,7 +590,7 @@ function stripEmailBg(html) {
         // Strip bgcolor attributes
         .replace(/\sbgcolor=['"][^'"]*['"]/gi, '')
         // Strip color styles that make text invisible on dark bg (white/near-white text)
-        .replace(/color\s*:\s*(white|#fff|#ffffff|rgb\(255,255,255\))/gi, 'color: #bdc1c6');
+        .replace(/color\s*:\s*(white|#fff|#ffffff|rgb\(255,255,255\))/gi, 'color: var(--text-primary)');
 }
 
 // ============================================
@@ -600,92 +602,107 @@ function renderEmailDetail(email) {
     const acc = accounts[activeAccountIndex];
     const myName = acc ? acc.name : 'Me';
     const myEmail = acc ? acc.email : 'user@gmail.com';
+    // Folder chip shown under the subject (Inbox / Sent / Drafts …)
+    const rawFolder = email.folder || state.currentFolder || 'inbox';
+    const folderLabel = rawFolder.charAt(0).toUpperCase() + rawFolder.slice(1);
 
     dom.emailDetailBody.innerHTML = `
         <!-- ═══════════════════════════════════
              ZONE 1: Subject row
              bg: #1b1b1b (Warm brown - exactly like screenshot top)
              ═══════════════════════════════════ -->
-        <h1 style="
-            font-size: 22px; margin: 0;
-            padding: 8px 16px 16px 16px;
-            font-weight: 400; line-height: 1.35;
-            color: #e3e3e3;
-            background: #1b1b1b;
+        <div style="
+            padding: 20px 16px 18px 20px;
+            background: var(--detail-bg);
             display: flex; align-items: flex-start;
-            justify-content: space-between; gap: 16px;
+            justify-content: space-between; gap: 14px;
         ">
-            <div>
-                ${email.subject}
+            <div style="min-width:0;">
+                <h1 style="
+                    font-size: 24px; margin: 0;
+                    font-weight: 400; line-height: 1.35;
+                    color: var(--text-primary);
+                    overflow-wrap: break-word;
+                ">${email.fullSubject || email.subject}</h1>
+                <span style="
+                    display:inline-block; margin-top:12px;
+                    padding:3px 10px;
+                    background:var(--chip-bg); color:var(--chip-text);
+                    border:1px solid var(--chip-border);
+                    border-radius:6px; font-size:13px;
+                    font-weight:500; line-height:1.5;
+                    white-space:nowrap; cursor:pointer;
+                ">${folderLabel}</span>
             </div>
-            <span class="material-icons-outlined" style="color:#9aa0a6; cursor:pointer; flex-shrink:0; margin-top:4px; font-size:22px;">star_border</span>
-        </h1>
+            <span class="material-icons-outlined ${email.starred ? 'starred' : ''}" data-star-id="${email.id}" style="color:${email.starred ? '#f9ab00' : 'var(--text-secondary)'}; cursor:pointer; flex-shrink:0; margin-top:6px; font-size:26px;">${email.starred ? 'star' : 'star_border'}</span>
+        </div>
 
-        <!-- ZONE 2: Page Background = seamless warm (same as header) -->
-        <div style="background: #1b1b1b; padding: 12px 12px 24px 12px; flex: 1;">
+        <!-- ZONE 2: Page background — lighter warm brown, same as subject row -->
+        <div style="background: var(--detail-bg); padding: 4px 14px 28px 14px; flex: 1;">
 
-            <!-- ZONE 3: Unified Card — exactly like reference image -->
+            <!-- ZONE 3: Message card — DARKER than the page (matches reference) -->
             <div style="
-                background: #242424;
-                border-radius: 16px;
+                background: var(--detail-card);
+                border-radius: 18px;
                 overflow: hidden;
             ">
                 <!-- Avatar + Name + Icons row -->
-                <div style="padding: 14px 16px 10px 16px;">
+                <div style="padding: 18px 16px 14px 18px;">
                     <div style="display:flex; align-items:flex-start;">
                         ${avatarHtml}
-                        <div style="flex:1; min-width:0; margin-left:12px;">
+                        <div style="flex:1; min-width:0; margin-left:16px;">
                             <div style="display:flex; align-items:center; justify-content:space-between;">
-                                <div style="display:flex; align-items:center; gap:6px; flex:1; min-width:0; overflow:hidden;">
-                                    <span style="font-weight:500; font-size:15px; color:#e3e3e3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:130px;">${email.sender.length > 12 ? email.sender.substring(0,12)+'...' : email.sender}</span>
-                                    ${email.verified ? '<span class="material-icons" style="color:#1d9bf0; font-size:14px; flex-shrink:0;">verified</span>' : ''}
-                                    <span style="color:#9aa0a6; font-size:12px; white-space:nowrap; flex-shrink:0;">${email.date || ''}</span>
+                                <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:0; overflow:hidden;">
+                                    <span style="font-weight:500; font-size:18px; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:120px;">${email.sender}</span>
+                                    ${email.verified ? '<span class="material-icons" style="color:#1d9bf0; font-size:16px; flex-shrink:0;">verified</span>' : ''}
+                                    <span style="color:var(--text-secondary); font-size:15px; white-space:nowrap; flex-shrink:0;">${email.date || ''}</span>
                                 </div>
-                                <div style="display:flex; align-items:center; gap:16px; color:#9aa0a6; flex-shrink:0; margin-left:8px;">
-                                    <span class="material-icons-outlined" style="cursor:pointer; font-size:20px;">mood</span>
-                                    <span class="material-icons-outlined" style="cursor:pointer; font-size:20px;">reply</span>
-                                    <span class="material-icons" style="cursor:pointer; font-size:20px;">more_vert</span>
+                                <div style="display:flex; align-items:center; gap:18px; color:var(--text-secondary); flex-shrink:0; margin-left:10px;">
+                                    <span class="material-icons-outlined" style="cursor:pointer; font-size:24px;">mood</span>
+                                    <span class="material-icons-outlined" style="cursor:pointer; font-size:24px;">reply</span>
+                                    <span class="material-icons" style="cursor:pointer; font-size:24px;">more_vert</span>
                                 </div>
                             </div>
-                            <!-- "to me" toggle -->
-                            <div id="detail-to-me-btn" style="color:#9aa0a6; font-size:12px; cursor:pointer; display:flex; align-items:center; margin-top:4px; user-select:none;">
-                                to me <span class="material-icons" style="font-size:15px; margin-left:2px;">expand_more</span>
+                            <!-- "to ..." toggle -->
+                            <div id="detail-to-me-btn" style="color:var(--text-secondary); font-size:16px; cursor:pointer; display:flex; align-items:center; margin-top:6px; user-select:none;">
+                                to ${email.recipientLabel || 'me'} <span class="material-icons" style="font-size:19px; margin-left:3px;">expand_more</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Expanded "to me" details — slightly deeper warm shade -->
+                <!-- Expanded "to me" details — slightly lifted warm shade -->
                 <div id="detail-expanded-info" class="hidden" style="
-                    background: #202124;
-                    margin: 0;
-                    padding: 14px 16px 16px 16px;
-                    font-size: 13px;
+                    background: var(--detail-panel);
+                    margin: 0 14px 4px 14px;
+                    border-radius: 12px;
+                    padding: 16px 18px 18px 18px;
+                    font-size: 15px;
                 ">
-                    <table style="width:100%; border-spacing:0; color:#9aa0a6;">
+                    <table style="width:100%; border-spacing:0; color:var(--text-secondary);">
                         <tr>
-                            <td style="padding-bottom:10px; width:68px; vertical-align:top; white-space:nowrap; font-size:13px;">From</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;"><span style="font-weight:500;">${email.sender}</span> • ${email.email}</td>
+                            <td style="padding-bottom:10px; width:80px; vertical-align:top; white-space:nowrap; font-size:15px;">From</td>
+                            <td style="padding-bottom:10px; color:var(--text-primary); font-size:15px;"><span style="font-weight:500;">${email.sender}</span> • ${email.email}</td>
                         </tr>
                         <tr>
-                            <td style="padding-bottom:10px; vertical-align:top; font-size:13px;">Reply to</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;">${email.email}</td>
+                            <td style="padding-bottom:10px; vertical-align:top; font-size:15px;">Reply to</td>
+                            <td style="padding-bottom:10px; color:var(--text-primary); font-size:15px;">${email.email}</td>
                         </tr>
                         <tr>
-                            <td style="padding-bottom:10px; vertical-align:top; font-size:13px;">To</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;">${myName} &lt;${myEmail}&gt;</td>
+                            <td style="padding-bottom:10px; vertical-align:top; font-size:15px;">To</td>
+                            <td style="padding-bottom:10px; color:var(--text-primary); font-size:15px;">${myName} &lt;${myEmail}&gt;</td>
                         </tr>
                         <tr>
-                            <td style="padding-bottom:10px; vertical-align:top; font-size:13px;">Date</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;">${email.fullDate || email.date}</td>
+                            <td style="padding-bottom:10px; vertical-align:top; font-size:15px;">Date</td>
+                            <td style="padding-bottom:10px; color:var(--text-primary); font-size:15px;">${email.fullDate || email.date}</td>
                         </tr>
                         <tr>
                             <td style="vertical-align:top; padding-top:2px;">
-                                <span class="material-icons-outlined" style="font-size:15px; color:#9aa0a6; vertical-align:middle;">lock</span>
+                                <span class="material-icons-outlined" style="font-size:17px; color:var(--text-secondary); vertical-align:middle;">lock</span>
                             </td>
-                            <td style="color:#9aa0a6; font-size:13px;">
+                            <td style="color:var(--text-secondary); font-size:15px;">
                                 Standard encryption (TLS).
-                                <a href="#" onclick="return false;" style="color:#9aa0a6; text-decoration:none; font-weight:500;"> See security details</a>
+                                <a href="#" onclick="return false;" style="color:var(--link-warm); text-decoration:none; font-weight:500;"> See security details</a>
                             </td>
                         </tr>
                     </table>
@@ -698,14 +715,14 @@ function renderEmailDetail(email) {
                      ═══════════════════════════════════ -->
                 <div id="email-body-content" style="
                     background: transparent;
-                    padding: 8px 16px 24px 16px;
-                    color: #e3e3e3;
-                    font-size: 15px;
-                    line-height: 1.5;
+                    padding: 14px 18px 28px 18px;
+                    color: var(--text-primary);
+                    font-size: 17px;
+                    line-height: 1.55;
                     overflow-wrap: break-word;
                     word-break: break-word;
                 ">
-                    ${stripEmailBg(email.body && email.body !== '<p></p>' ? email.body : '<span style="color:#9aa0a6;">(No content)</span>')}
+                    ${stripEmailBg(email.body && email.body !== '<p></p>' ? email.body : '<span style="color:var(--text-secondary);">(No content)</span>')}
                 </div>
             </div>
         </div>
@@ -715,18 +732,18 @@ function renderEmailDetail(email) {
     dom.emailDetailFooter = dom.emailDetailFooter || $('#email-detail-footer');
     if (dom.emailDetailFooter) {
         dom.emailDetailFooter.innerHTML = `
-            <div style="background: #1b1b1b; padding: 10px 14px 94px 14px; width: 100%; box-sizing: border-box;">
+            <div style="background: var(--detail-bg); padding: 10px 14px 94px 14px; width: 100%; box-sizing: border-box;">
                 <div style="display:flex; gap:8px; align-items:center;">
                     <!-- Reply pill — warm tan with thin stroke curved arrow (matches reference) -->
                     <button id="reply-btn" style="
-                        background:#eccaa4; color:#2b1b10; border:none;
-                        border-radius:100px; height:50px; padding:0 20px;
-                        font-weight:500; font-size:15px;
-                        display:flex; align-items:center; gap:8px;
+                        background:var(--reply-pill-bg); color:var(--reply-pill-text); border:none;
+                        border-radius:100px; height:52px; padding:0 22px;
+                        font-weight:500; font-size:16px;
+                        display:flex; align-items:center; gap:9px;
                         flex:1; justify-content:center;
                         cursor:pointer; transition:background 0.15s;
                         font-family:var(--font-main);
-                    " onmouseover="this.style.background='#dcb68c'" onmouseout="this.style.background='#eccaa4'">
+                    " onmouseover="this.style.background='var(--reply-pill-hover)'" onmouseout="this.style.background='var(--reply-pill-bg)'">
                         <!-- Thin curved reply arrow (like &#8617;) -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
                           <polyline points="9 14 4 9 9 4"/>
@@ -735,31 +752,31 @@ function renderEmailDetail(email) {
                     </button>
                     <!-- Forward pill — mirrored thin stroke curved arrow (matches reference) -->
                     <button id="forward-btn" style="
-                        background:#eccaa4; color:#2b1b10; border:none;
-                        border-radius:100px; height:50px; padding:0 20px;
-                        font-weight:500; font-size:15px;
-                        display:flex; align-items:center; gap:8px;
+                        background:var(--reply-pill-bg); color:var(--reply-pill-text); border:none;
+                        border-radius:100px; height:52px; padding:0 22px;
+                        font-weight:500; font-size:16px;
+                        display:flex; align-items:center; gap:9px;
                         flex:1; justify-content:center;
                         cursor:pointer; transition:background 0.15s;
                         font-family:var(--font-main);
-                    " onmouseover="this.style.background='#dcb68c'" onmouseout="this.style.background='#eccaa4'">
+                    " onmouseover="this.style.background='var(--reply-pill-hover)'" onmouseout="this.style.background='var(--reply-pill-bg)'">
                         <!-- Thin curved forward arrow (like &#8618;, mirror of reply) -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; transform:scaleX(-1);">
                           <polyline points="9 14 4 9 9 4"/>
                           <path d="M4 9h11a5 5 0 0 1 0 10h-1"/>
                         </svg> Forward
                     </button>
-                    <!-- Smiley — transparent outline circle exactly like reference -->
-                    <button style="
-                        background: transparent;
-                        border: 1.5px solid #6b5844;
-                        border-radius: 50%; width: 50px; height: 50px;
+                    <!-- Smiley — dark warm circle with tan glyph (matches reference) -->
+                    <button aria-label="React" style="
+                        background: var(--emoji-btn-bg);
+                        border: none;
+                        border-radius: 50%; width: 52px; height: 52px;
                         flex-shrink: 0; display: flex; align-items: center;
                         justify-content: center; cursor: pointer;
-                        color: #c8ae8a;
+                        color: var(--emoji-btn-icon);
                         transition: background 0.15s;
-                    " onmouseover="this.style.background='rgba(200,174,138,0.12)'" onmouseout="this.style.background='transparent'">
-                        <span class="material-icons-outlined" style="font-size:22px;">sentiment_satisfied</span>
+                    " onmouseover="this.style.background='var(--warm-400)'" onmouseout="this.style.background='var(--emoji-btn-bg)'">
+                        <span class="material-icons-outlined" style="font-size:24px;">sentiment_satisfied</span>
                     </button>
                 </div>
             </div>
@@ -1176,7 +1193,7 @@ dom.sendBtn.addEventListener('click', () => {
         subject: subject || '(no subject)',
         snippet: body.replace(/<[^>]*>/g, '').substring(0, 100),
         body: body || '<p></p>',
-        date: 'Just now',
+        date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
         fullDate: new Date().toLocaleString(),
         unread: false,
         starred: false,
@@ -1315,22 +1332,22 @@ const addAccountBackBtn = $('#add-account-back-btn');
 
 // Default accounts (seeded)
 const DEFAULT_ACCOUNTS = [
-    { name: 'Unknown User', email: 'unknown@gmail.com', color: '#f44336', photo: null },
+    { name: 'Aryan', email: 'mindsettt369@gmail.com', color: '#e8590c', photo: null },
 ];
 
 // Load accounts from localStorage or seed defaults
 function loadAccounts() {
-    const stored = localStorage.getItem('gmail_accounts_v2');
+    const stored = localStorage.getItem('gmail_accounts_v3');
     if (stored) {
         try { return JSON.parse(stored); } catch(e) { /* fall through */ }
     }
     // Seed defaults on first load
-    localStorage.setItem('gmail_accounts_v2', JSON.stringify(DEFAULT_ACCOUNTS));
+    localStorage.setItem('gmail_accounts_v3', JSON.stringify(DEFAULT_ACCOUNTS));
     return [...DEFAULT_ACCOUNTS];
 }
 
 function saveAccounts(accounts) {
-    localStorage.setItem('gmail_accounts_v2', JSON.stringify(accounts));
+    localStorage.setItem('gmail_accounts_v3', JSON.stringify(accounts));
 }
 
 let userAccounts = loadAccounts();
@@ -1339,6 +1356,7 @@ let currentActiveAccount = userAccounts[0] || DEFAULT_ACCOUNTS[0];
 function updateActiveAccountUI() {
     const mainAvatar = $('#main-account-avatar');
     const userAvatar = $('#user-avatar');
+    const mobileAvatar = $('#mobile-user-avatar');
     const accountEmailDisplay = document.querySelector('.account-email');
     const accountNameDisplay = document.querySelector('.account-name');
     
@@ -1355,6 +1373,10 @@ function updateActiveAccountUI() {
         userAvatar.textContent = currentActiveAccount.photo ? '' : initial;
         userAvatar.setAttribute('style', bgStyle + ' overflow: hidden;');
     }
+    if (mobileAvatar) {
+        mobileAvatar.textContent = currentActiveAccount.photo ? '' : initial;
+        mobileAvatar.setAttribute('style', bgStyle + ' overflow: hidden;');
+    }
     if (accountEmailDisplay) {
         accountEmailDisplay.textContent = currentActiveAccount.email;
     }
@@ -1368,7 +1390,7 @@ function renderAccountList() {
     if (!accountListEl) return;
     accountListEl.innerHTML = '';
     if (userAccounts.length === 0) {
-        accountListEl.innerHTML = '<div style="padding:16px 24px;color:#9aa0a6;font-size:14px;text-align:center;">No accounts added yet</div>';
+        accountListEl.innerHTML = '<div style="padding:16px 24px;color:var(--text-secondary);font-size:14px;text-align:center;">No accounts added yet</div>';
         return;
     }
     userAccounts.forEach((acc, idx) => {
@@ -1706,7 +1728,7 @@ function openAddEmailFlow() {
     if ($('#ae-email-input')) $('#ae-email-input').value = '';
     if ($('#ae-subject-input')) $('#ae-subject-input').value = '';
     if ($('#ae-snippet-input')) $('#ae-snippet-input').value = '';
-    if ($('#ae-preview-avatar')) $('#ae-preview-avatar').innerHTML = '<span class="material-icons" style="font-size:28px; color:#bdc1c6;">account_circle</span>';
+    if ($('#ae-preview-avatar')) $('#ae-preview-avatar').innerHTML = '<span class="material-icons" style="font-size:28px; color:var(--text-tertiary);">account_circle</span>';
     if ($('#ae-tick-icon')) $('#ae-tick-icon').classList.remove('active');
     
     if (aeOverlay) aeOverlay.classList.remove('hidden');
@@ -1811,7 +1833,7 @@ $('#ae-photo-done')?.addEventListener('click', () => {
         subject: customEmailData.subject,
         snippet: customEmailData.snippet,
         body: `<p>${customEmailData.snippet}</p>`,
-        date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+        date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
         fullDate: new Date().toLocaleString(),
         unread: true, starred: false, important: false,
         labels: [], hasAttachment: false,
@@ -2068,8 +2090,10 @@ document.getElementById('dt-confirm-btn')?.addEventListener('click', () => {
 
     // Build display date
     const dt = new Date(`${dateVal}T${timeVal}`);
-    const displayTime = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const displayFull = dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + displayTime;
+    // List rows show a short date (e.g. "5 Aug"), never a clock time
+    const displayTime = dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+    const displayFull = dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
+        + ', ' + dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     // Gather compose data
     const acc = accounts[activeAccountIndex];
