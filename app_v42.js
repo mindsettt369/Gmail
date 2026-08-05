@@ -718,34 +718,36 @@ function renderEmailDetail(email) {
         dom.emailDetailFooter.innerHTML = `
             <div style="background: #1c130e; padding: 10px 14px 94px 14px; width: 100%; box-sizing: border-box;">
                 <div style="display:flex; gap:8px; align-items:center;">
-                    <!-- Reply pill — cream beige with undo-style curved arrow -->
+                    <!-- Reply pill — warm tan with thin stroke curved arrow (matches reference) -->
                     <button id="reply-btn" style="
-                        background:#e8d5b5; color:#201208; border:none;
+                        background:#eccaa4; color:#2b1b10; border:none;
                         border-radius:100px; height:50px; padding:0 20px;
                         font-weight:500; font-size:15px;
                         display:flex; align-items:center; gap:8px;
                         flex:1; justify-content:center;
                         cursor:pointer; transition:background 0.15s;
                         font-family:var(--font-main);
-                    " onmouseover="this.style.background='#d4c09e'" onmouseout="this.style.background='#e8d5b5'">
-                        <!-- Gmail exact reply SVG icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
-                          <path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/>
+                    " onmouseover="this.style.background='#dcb68c'" onmouseout="this.style.background='#eccaa4'">
+                        <!-- Thin curved reply arrow (like &#8617;) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                          <polyline points="9 14 4 9 9 4"/>
+                          <path d="M4 9h11a5 5 0 0 1 0 10h-1"/>
                         </svg> Reply
                     </button>
-                    <!-- Forward pill — mirrored reply-style curved arrow pointing right -->
+                    <!-- Forward pill — mirrored thin stroke curved arrow (matches reference) -->
                     <button id="forward-btn" style="
-                        background:#e8d5b5; color:#201208; border:none;
+                        background:#eccaa4; color:#2b1b10; border:none;
                         border-radius:100px; height:50px; padding:0 20px;
                         font-weight:500; font-size:15px;
                         display:flex; align-items:center; gap:8px;
                         flex:1; justify-content:center;
                         cursor:pointer; transition:background 0.15s;
                         font-family:var(--font-main);
-                    " onmouseover="this.style.background='#d4c09e'" onmouseout="this.style.background='#e8d5b5'">
-                        <!-- Gmail exact forward SVG icon (mirror of reply) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0; transform:scaleX(-1);">
-                          <path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/>
+                    " onmouseover="this.style.background='#dcb68c'" onmouseout="this.style.background='#eccaa4'">
+                        <!-- Thin curved forward arrow (like &#8618;, mirror of reply) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; transform:scaleX(-1);">
+                          <polyline points="9 14 4 9 9 4"/>
+                          <path d="M4 9h11a5 5 0 0 1 0 10h-1"/>
                         </svg> Forward
                     </button>
                     <!-- Smiley — transparent outline circle exactly like reference -->
