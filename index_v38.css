@@ -1453,7 +1453,7 @@ input {
         grid-template-areas: unset !important;
         align-items: center !important;
         gap: 0 !important;
-        padding: 12px 16px !important;
+        padding: 10px 12px 10px 14px !important;
     }
     
     .mobile-avatar {

@@ -457,27 +457,27 @@ function renderMobileEmailList(filtered) {
 function renderMobileCategoryRow(email) {
     let iconHtml, badgeStyle;
     if (email.avatarType === 'updates') {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:24px; color:#e37400;">info</span>`;
+        iconHtml = `<span class="material-icons-outlined" style="font-size:20px; color:#e37400;">info</span>`;
         badgeStyle = 'background:#e37400; color:#1a1210;';
     } else if (email.avatarType === 'promotions') {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:24px; color:#1e8e3e;">local_offer</span>`;
+        iconHtml = `<span class="material-icons-outlined" style="font-size:20px; color:#1e8e3e;">local_offer</span>`;
         badgeStyle = 'background:#1e8e3e; color:#fff;';
     } else {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:24px; color:var(--text-secondary);">people</span>`;
+        iconHtml = `<span class="material-icons-outlined" style="font-size:20px; color:var(--text-secondary);">people</span>`;
         badgeStyle = email.badgeColor === 'orange' ? 'background:#e37400; color:#fff;' : 'background:#1a73e8; color:#fff;';
     }
 
     return `
     <div class="email-row mobile-category-row" data-email-id="${email.id}" style="animation-delay:0s">
-        <div class="mobile-avatar" style="background:transparent; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        <div class="mobile-avatar" style="background:transparent; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
             ${iconHtml}
         </div>
-        <div style="flex:1; min-width:0; margin-left:16px;">
-            <div style="font-size:16px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${email.sender}</div>
-            <div style="font-size:14px; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px;">${email.subject}</div>
+        <div style="flex:1; min-width:0; margin-left:12px;">
+            <div style="font-size:14px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:17px;">${email.sender}</div>
+            <div style="font-size:12px; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:1px; line-height:16px;">${email.subject}</div>
         </div>
         <div style="flex-shrink:0; margin-left:8px;">
-            <span style="display:inline-block; padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600; ${badgeStyle}">${email.badgeCount}</span>
+            <span style="display:inline-block; padding:3px 8px; border-radius:20px; font-size:11px; font-weight:600; ${badgeStyle}">${email.badgeCount}</span>
         </div>
     </div>`;
 }
