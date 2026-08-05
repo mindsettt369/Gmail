@@ -35,8 +35,8 @@ const emails = [
         subject: 'Your Starter Business Email pla…',
         snippet: 'Act now',
         body: `<p>Your Starter Business Email plan is waiting for you. Act now to get started with professional email hosting from Hostinger.</p>`,
-        date: '30 Jul',
-        fullDate: 'Jul 30, 2026, 11:17 AM',
+        date: '11:17',
+        fullDate: 'Aug 5, 2026, 11:17 AM',
         unread: true, starred: false, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'hostinger',
@@ -336,13 +336,11 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
         </div>`;
     }
     if (email.avatarType === 'hostinger') {
-        // Exact Hostinger brand: white circle, dark navy/purple rounded square, white H (two verticals + cross bar)
+        // Exact Hostinger brand: white circle, dark navy/purple rounded square, white H with slanted crossbar
         return `<div class="mobile-avatar" style="background:#ffffff; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-                <rect width="26" height="26" rx="6" fill="#2d1b6b"/>
-                <rect x="6" y="7" width="4" height="12" rx="1" fill="white"/>
-                <rect x="16" y="7" width="4" height="12" rx="1" fill="white"/>
-                <rect x="6" y="11" width="14" height="4" rx="1" fill="white"/>
+                <rect width="26" height="26" rx="6" fill="#2F1C6A"/>
+                <path fill="#ffffff" d="M7 6h3.4v5.6l5.2-1.9V6H19v14h-3.4v-5.6l-5.2 1.9V20H7z"/>
             </svg>
         </div>`;
     }
