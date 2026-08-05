@@ -310,19 +310,19 @@
 
             <!-- Email Detail View (hidden by default) -->
             <div class="email-detail hidden" id="email-detail">
-                <div class="email-detail-header" style="display:flex; align-items:center; justify-content:space-between; padding:4px 8px; min-height:56px; background:#1b1b1b !important; border:none; border-bottom:none; box-shadow:none; outline:none;">
-                    <button class="icon-btn" id="back-to-list-btn" aria-label="Back to inbox" style="width:48px; height:48px;">
-                        <span class="material-icons-outlined" style="font-size:24px; color:var(--text-primary);">arrow_back</span>
+                <div class="email-detail-header" style="display:flex; align-items:center; justify-content:space-between; padding:4px 8px; min-height:64px; background:var(--detail-bg) !important; color:var(--detail-icon); border:none; border-bottom:none; box-shadow:none; outline:none;">
+                    <button class="icon-btn" id="back-to-list-btn" aria-label="Back to inbox" style="width:52px; height:52px; color:var(--detail-icon);">
+                        <span class="material-icons-outlined" style="font-size:30px; color:var(--detail-icon);">arrow_back</span>
                     </button>
-                    <div style="display:flex; align-items:center; gap:6px;">
-                        <button class="icon-btn" aria-label="Delete" style="width:48px; height:48px;">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                    <div style="display:flex; align-items:center; gap:8px; color:var(--detail-icon);">
+                        <button class="icon-btn" aria-label="Delete" style="width:52px; height:52px; color:var(--detail-icon);">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="var(--detail-icon)" aria-hidden="true">
                                 <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"/>
                                 <path d="M9 8h2v9H9zm4 0h2v9h-2z"/>
                             </svg>
                         </button>
-                        <button class="icon-btn" aria-label="Mark as unread" style="width:48px; height:48px;"><span class="material-icons-outlined" style="font-size:26px; color:var(--text-primary);">mark_email_unread</span></button>
-                        <button class="icon-btn" aria-label="More" style="width:48px; height:48px;"><span class="material-icons" style="font-size:26px; color:var(--text-primary);">more_vert</span></button>
+                        <button class="icon-btn" aria-label="Mark as unread" style="width:52px; height:52px; color:var(--detail-icon);"><span class="material-icons-outlined" style="font-size:30px; color:var(--detail-icon);">mark_email_unread</span></button>
+                        <button class="icon-btn" aria-label="More" style="width:52px; height:52px; color:var(--detail-icon);"><span class="material-icons" style="font-size:30px; color:var(--detail-icon);">more_vert</span></button>
                     </div>
                 </div>
                 <div class="email-detail-body" id="email-detail-body">
