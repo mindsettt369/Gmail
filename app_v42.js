@@ -729,9 +729,9 @@ function renderEmailDetail(email) {
                         font-family:var(--font-main);
                     " onmouseover="this.style.background='#dcb68c'" onmouseout="this.style.background='#eccaa4'">
                         <!-- Thin curved reply arrow (like &#8617;) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
-                          <polyline points="9 19 4 14 9 9"/>
-                          <path d="M4 14h10.5a5.5 5.5 0 0 0 5.5-5.5V5"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                          <polyline points="9 20 4 15 9 10"/>
+                          <path d="M4 15h11a5 5 0 0 0 0-10h-1"/>
                         </svg> Reply
                     </button>
                     <!-- Forward pill — mirrored thin stroke curved arrow (matches reference) -->
@@ -745,9 +745,9 @@ function renderEmailDetail(email) {
                         font-family:var(--font-main);
                     " onmouseover="this.style.background='#dcb68c'" onmouseout="this.style.background='#eccaa4'">
                         <!-- Thin curved forward arrow (like &#8618;, mirror of reply) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; transform:scaleX(-1);">
-                          <polyline points="9 19 4 14 9 9"/>
-                          <path d="M4 14h10.5a5.5 5.5 0 0 0 5.5-5.5V5"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; transform:scaleX(-1);">
+                          <polyline points="9 20 4 15 9 10"/>
+                          <path d="M4 15h11a5 5 0 0 0 0-10h-1"/>
                         </svg> Forward
                     </button>
                     <!-- Smiley — transparent outline circle exactly like reference -->
