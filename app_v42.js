@@ -319,7 +319,7 @@ function updateCounts() {
 //  RENDER: Avatar HTML
 // ============================================
 function renderAvatarHTML(email, isMobile = false, isDetail = false) {
-    const size = isDetail ? 48 : (isMobile ? 40 : 40);
+    const size = isDetail ? 48 : (isMobile ? 36 : 40);
     
     if (email.avatarType === 'wati') {
         return `<div class="mobile-avatar" style="background:#25d366; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
@@ -329,8 +329,8 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
         </div>`;
     }
     if (email.avatarType === 'facebook') {
-        return `<div class="mobile-avatar" style="background:#1877F2; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+        return `<div class="mobile-avatar" style="background:#1877F2; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;">
+            <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="white">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
         </div>`;
@@ -338,7 +338,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     if (email.avatarType === 'hostinger') {
         // Exact Hostinger brand: white circle, dark navy/purple rounded square, white H with slanted crossbar
         return `<div class="mobile-avatar" style="background:#ffffff; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+            <svg width="${size}" height="${size}" viewBox="0 0 26 26" fill="none">
                 <rect width="26" height="26" rx="6" fill="#2F1C6A"/>
                 <path fill="#ffffff" d="M7 6h3.4v5.6l5.2-1.9V6H19v14h-3.4v-5.6l-5.2 1.9V20H7z"/>
             </svg>
@@ -352,7 +352,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     if (email.avatarType === 'initial') {
         const initial = email.sender.charAt(0).toUpperCase();
         const bg = email.avatarColor || randomAvatarColor(email.sender);
-        return `<div class="mobile-avatar" style="background:${bg}; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:white; font-size:18px; font-weight:600; font-family:var(--font-main);">
+        return `<div class="mobile-avatar" style="background:${bg}; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:white; font-size:${Math.round(size * 0.45)}px; font-weight:600; font-family:var(--font-main);">
             ${initial}
         </div>`;
     }
@@ -374,7 +374,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     if (email.avatarType === 'default') {
         // Gmail-style: grey circle, person silhouette anchored to bottom
         return `<div class="mobile-avatar" style="background:#5f6368; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:flex-end; justify-content:center; flex-shrink:0; overflow:hidden;">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="#bdc1c6" style="margin-bottom:-2px;">
+            <svg width="${Math.round(size * 0.78)}" height="${Math.round(size * 0.78)}" viewBox="0 0 24 24" fill="#bdc1c6" style="margin-bottom:-2px;">
                 <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
             </svg>
         </div>`;
