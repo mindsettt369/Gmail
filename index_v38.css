@@ -782,7 +782,7 @@ input {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: #1c130e !important;
+    background: #1b1b1b !important;
 }
 
 .email-detail-header {
@@ -795,7 +795,7 @@ input {
     box-shadow: none;
     outline: none;
     flex-shrink: 0;
-    background: #1c130e !important;
+    background: #1b1b1b !important;
 }
 .email-detail-actions {
     display: flex;
@@ -822,7 +822,7 @@ input {
         right: 0;
         bottom: 0;
         z-index: 90;
-        background: #1c130e !important;
+        background: #1b1b1b !important;
         display: flex;
         flex-direction: column;
     }
@@ -831,13 +831,13 @@ input {
         bottom: 0;
         z-index: 300;
         flex-shrink: 0;
-        background: #1c130e;
+        background: #1b1b1b;
     }
     .email-detail-header {
         position: sticky;
         top: 0;
         z-index: 10;
-        background: #201714;
+        background: #1b1b1b;
         border: none;
         border-bottom: none;
         box-shadow: none;
