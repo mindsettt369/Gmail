@@ -10,7 +10,7 @@
     <title>Gmail Clone</title>
     <script>
       // NUCLEAR CACHE BUSTER — forces reload for all workers automatically
-      var APP_VERSION = 'v57-gmail-svg-1754358000';
+      var APP_VERSION = 'v58-warm-brown-theme';
       var storedVersion = localStorage.getItem('app_version');
       
       // Auto-reload when a new service worker takes over! (Crucial for workers who don't clear cache)
@@ -41,10 +41,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
-    <link rel="stylesheet" href="index_v38.css?v=2">
-    <link rel="stylesheet" href="advanced_features.css?v=6">
+    <link rel="stylesheet" href="index_v38.css?v=3">
+    <link rel="stylesheet" href="advanced_features.css?v=7">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1a1210">
+    <meta name="theme-color" content="#1E1815">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -55,7 +55,7 @@
 </head>
 <body>
     <!-- Splash Screen -->
-    <div id="app-splash" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#1f1f1f; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 0.4s ease;">
+    <div id="app-splash" style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--warm-050); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 0.4s ease;">
         <!-- Container for logo -->
         <div style="flex:1; display:flex; align-items:center; justify-content:center;">
             <!-- M Logo with official colors -->
@@ -145,22 +145,22 @@
                     <a href="#" class="nav-item active" data-folder="inbox">
                         <span class="material-icons-outlined nav-icon">inbox</span>
                         <span class="nav-label">Primary</span>
-                        <span class="nav-badge" id="inbox-count" style="background:#d8c9bc; color:#1a1210;">1 new</span>
+                        <span class="nav-badge" id="inbox-count" style="background:var(--amber-container); color:var(--amber-on-container);">1 new</span>
                     </a>
                     <a href="#" class="nav-item" data-folder="promotions">
                         <span class="material-icons-outlined nav-icon">local_offer</span>
                         <span class="nav-label">Promotions</span>
-                        <span class="nav-badge" style="background:#81c995; color:#000;">24 new</span>
+                        <span class="nav-badge" style="background:var(--amber-container); color:var(--amber-on-container);">24 new</span>
                     </a>
                     <a href="#" class="nav-item" data-folder="social">
                         <span class="material-icons-outlined nav-icon">people</span>
                         <span class="nav-label">Social</span>
-                        <span class="nav-badge" style="background:#8ab4f8; color:#000;">49 new</span>
+                        <span class="nav-badge" style="background:var(--amber-container); color:var(--amber-on-container);">49 new</span>
                     </a>
                     <a href="#" class="nav-item" data-folder="updates">
                         <span class="material-icons-outlined nav-icon">info</span>
                         <span class="nav-label">Updates</span>
-                        <span class="nav-badge" style="background:#fcad70; color:#000;">39 new</span>
+                        <span class="nav-badge" style="background:var(--tan-pill); color:var(--tan-on-pill);">39 new</span>
                     </a>
 
                     <div class="sidebar-section-title">All labels</div>
@@ -168,12 +168,12 @@
                     <a href="#" class="nav-item" data-folder="starred">
                         <span class="material-icons-outlined nav-icon">star_border</span>
                         <span class="nav-label">Starred</span>
-                        <span class="nav-badge" style="background:#8ab4f8; color:#000;">new</span>
+                        <span class="nav-badge" style="background:var(--amber-container); color:var(--amber-on-container);">new</span>
                     </a>
                     <a href="#" class="nav-item" data-folder="snoozed">
                         <span class="material-icons-outlined nav-icon">schedule</span>
                         <span class="nav-label">Snoozed</span>
-                        <span class="nav-badge" style="background:#81c995; color:#000;">new</span>
+                        <span class="nav-badge" style="background:var(--amber-container); color:var(--amber-on-container);">new</span>
                     </a>
                     <a href="#" class="nav-item" data-folder="important">
                         <span class="material-icons-outlined nav-icon">label_important</span>
@@ -358,9 +358,9 @@
     <!-- ====== MOBILE BOTTOM NAV & FAB ====== -->
     <div id="mobile-bottom-nav" style="position:fixed; bottom:0; left:0; right:0; height:80px; background:var(--bottom-nav-bg); display:flex; align-items:center; justify-content:space-around; z-index:200; border-top:none;" class="hidden-desktop">
         <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; cursor:pointer; width:64px; margin-top:-10px;">
-            <div style="position:relative; display:inline-flex; align-items:center; justify-content:center; background:#58422b; width:64px; height:32px; border-radius:16px;">
-                <span class="material-icons" style="font-size:24px; color:#fee1c1;">mail</span>
-                <span style="position:absolute; top:-4px; right:-8px; background:#f2b8b5; color:#410002; font-size:10px; font-weight:700; padding:2px 5px; border-radius:12px; line-height:1.2; white-space:nowrap; border: 2px solid #1f1b16;">99+</span>
+            <div style="position:relative; display:inline-flex; align-items:center; justify-content:center; background:var(--amber-container); width:64px; height:32px; border-radius:16px;">
+                <span class="material-icons" style="font-size:24px; color:var(--amber-on-container);">mail</span>
+                <span style="position:absolute; top:-4px; right:-8px; background:#f2b8b5; color:#410002; font-size:10px; font-weight:700; padding:2px 5px; border-radius:12px; line-height:1.2; white-space:nowrap; border: 2px solid var(--bottom-nav-bg);">99+</span>
             </div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; width:64px; margin-top:-10px;">
@@ -487,7 +487,7 @@
                 <button class="ac-next-btn" id="ac-name-next">Next</button>
             </div>
             <div class="ac-body">
-                <div class="ac-icon-wrap"><span class="material-icons" style="font-size:40px;color:#c49a6c;">person</span></div>
+                <div class="ac-icon-wrap"><span class="material-icons" style="font-size:40px;color:var(--amber-link);">person</span></div>
                 <p class="ac-step-label">Step 1 of 4 — Your Name</p>
                 <input class="ac-input" id="ac-name-input" type="text" placeholder="Enter your name" autocomplete="off">
                 <p class="ac-hint">This name will appear as sender.</p>
@@ -501,7 +501,7 @@
                 <button class="ac-next-btn" id="ac-gmail-next">Next</button>
             </div>
             <div class="ac-body">
-                <div class="ac-icon-wrap"><span class="material-icons" style="font-size:40px;color:#c49a6c;">email</span></div>
+                <div class="ac-icon-wrap"><span class="material-icons" style="font-size:40px;color:var(--amber-link);">email</span></div>
                 <p class="ac-step-label">Step 2 of 4 — Gmail Address</p>
                 <input class="ac-input" id="ac-gmail-input" type="email" placeholder="yourname@gmail.com" autocomplete="off">
                 <p class="ac-hint">Enter your Gmail address.</p>
@@ -516,7 +516,7 @@
             </div>
             <div class="ac-body">
                 <div class="ac-icon-wrap ac-avatar-preview" id="ac-avatar-preview">
-                    <span class="material-icons" style="font-size:48px;color:#bdc1c6;" id="ac-avatar-icon">account_circle</span>
+                    <span class="material-icons" style="font-size:48px;color:var(--text-tertiary);" id="ac-avatar-icon">account_circle</span>
                     <img id="ac-avatar-img" src="" style="display:none;width:80px;height:80px;border-radius:50%;object-fit:cover;">
                 </div>
                 <p class="ac-step-label">Step 3 of 4 — Photo (Optional)</p>
@@ -560,7 +560,7 @@
                 <button class="tc-next-btn" id="tc-name-next">Next</button>
             </div>
             <div class="tc-body">
-                <div class="tc-icon-wrap"><span class="material-icons" style="font-size:40px;color:#c49a6c;">person_add</span></div>
+                <div class="tc-icon-wrap"><span class="material-icons" style="font-size:40px;color:var(--amber-link);">person_add</span></div>
                 <p class="tc-step-label">Step 1 of 3 — Recipient Name</p>
                 <input class="tc-input" id="tc-name-input" type="text" placeholder="Enter recipient name" autocomplete="off">
                 <p class="tc-hint">Name that will show in the email.</p>
@@ -574,7 +574,7 @@
                 <button class="tc-next-btn" id="tc-email-next">Next</button>
             </div>
             <div class="tc-body">
-                <div class="tc-icon-wrap"><span class="material-icons" style="font-size:40px;color:#c49a6c;">alternate_email</span></div>
+                <div class="tc-icon-wrap"><span class="material-icons" style="font-size:40px;color:var(--amber-link);">alternate_email</span></div>
                 <p class="tc-step-label">Step 2 of 3 — Email Address</p>
                 <input class="tc-input" id="tc-email-input" type="email" placeholder="recipient@example.com" autocomplete="off">
                 <p class="tc-hint">Email of the recipient.</p>
@@ -589,7 +589,7 @@
             </div>
             <div class="tc-body">
                 <div class="tc-icon-wrap" id="tc-avatar-preview" style="cursor:pointer;">
-                    <span class="material-icons" style="font-size:48px;color:#bdc1c6;" id="tc-avatar-icon">account_circle</span>
+                    <span class="material-icons" style="font-size:48px;color:var(--text-tertiary);" id="tc-avatar-icon">account_circle</span>
                     <img id="tc-avatar-img" src="" style="display:none;width:80px;height:80px;border-radius:50%;object-fit:cover;">
                 </div>
                 <p class="tc-step-label">Step 3 of 3 — Photo (Optional)</p>
@@ -677,7 +677,7 @@
                 <!-- Preview card -->
                 <div class="ae-preview-card" id="ae-preview-card">
                     <div class="ae-preview-avatar" id="ae-preview-avatar">
-                        <span class="material-icons" style="font-size:28px; color:#bdc1c6;">account_circle</span>
+                        <span class="material-icons" style="font-size:28px; color:var(--text-tertiary);">account_circle</span>
                     </div>
                     <div class="ae-preview-info">
                         <div class="ae-preview-name" id="ae-preview-name">—</div>
@@ -903,7 +903,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="app_v42.js?v=3"></script>
+    <script src="app_v42.js?v=4"></script>
     <script src="pwa.js?v=54"></script>
 </body>
 </html>

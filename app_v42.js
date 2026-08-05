@@ -13,10 +13,10 @@ const AVATAR_COLORS = [
 ];
 
 const LABEL_COLORS = {
-    work: { bg: '#d3e3fd', text: '#1a73e8' },
-    personal: { bg: '#ceead6', text: '#188038' },
-    finance: { bg: '#fef7e0', text: '#b06000' },
-    travel: { bg: '#fce8e6', text: '#c5221f' },
+    work: { bg: 'var(--amber-container)', text: 'var(--amber-on-container)' },
+    personal: { bg: 'var(--warm-300)', text: 'var(--amber-link)' },
+    finance: { bg: 'var(--tan-pill)', text: 'var(--tan-on-pill)' },
+    travel: { bg: 'var(--amber-container)', text: 'var(--amber-on-container)' },
 };
 
 function randomAvatarColor(name) {
@@ -350,7 +350,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     }
     if (email.avatarType === 'updates') {
         return `<div class="mobile-avatar" style="background:transparent; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <span class="material-icons-outlined" style="font-size:30px; color:#e37400;">info</span>
+            <span class="material-icons-outlined" style="font-size:30px; color:var(--amber-link);">info</span>
         </div>`;
     }
     if (email.avatarType === 'initial') {
@@ -367,7 +367,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     }
     if (email.avatarType === 'promotions') {
         return `<div class="mobile-avatar" style="background:transparent; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <span class="material-icons-outlined" style="font-size:30px; color:#1e8e3e;">local_offer</span>
+            <span class="material-icons-outlined" style="font-size:30px; color:var(--amber-link);">local_offer</span>
         </div>`;
     }
     if (email.avatarType === 'social') {
@@ -378,7 +378,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     if (email.avatarType === 'default') {
         // Gmail-style: grey circle, person silhouette anchored to bottom
         return `<div class="mobile-avatar" style="background:#5f6368; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:flex-end; justify-content:center; flex-shrink:0; overflow:hidden;">
-            <svg width="${Math.round(size * 0.78)}" height="${Math.round(size * 0.78)}" viewBox="0 0 24 24" fill="#bdc1c6" style="margin-bottom:-2px;">
+            <svg width="${Math.round(size * 0.78)}" height="${Math.round(size * 0.78)}" viewBox="0 0 24 24" fill="var(--text-tertiary)" style="margin-bottom:-2px;">
                 <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
             </svg>
         </div>`;
@@ -461,14 +461,14 @@ function renderMobileEmailList(filtered) {
 function renderMobileCategoryRow(email) {
     let iconHtml, badgeStyle;
     if (email.avatarType === 'updates') {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:#e37400;">info</span>`;
-        badgeStyle = 'background:#f0a878; color:#1a1210;';
+        iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:var(--amber-link);">info</span>`;
+        badgeStyle = 'background:var(--tan-pill); color:var(--tan-on-pill);';
     } else if (email.avatarType === 'promotions') {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:#1e8e3e;">local_offer</span>`;
-        badgeStyle = 'background:#a8dcb8; color:#0d2b14;';
+        iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:var(--amber-link);">local_offer</span>`;
+        badgeStyle = 'background:var(--amber-container); color:var(--amber-on-container);';
     } else {
         iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:var(--text-secondary);">people</span>`;
-        badgeStyle = email.badgeColor === 'orange' ? 'background:#e37400; color:#fff;' : 'background:#1a73e8; color:#fff;';
+        badgeStyle = email.badgeColor === 'orange' ? 'background:var(--amber-container); color:var(--amber-on-container);' : 'background:var(--amber-container); color:var(--amber-on-container);';
     }
 
     return `
@@ -500,7 +500,7 @@ function renderMobileEmailRow(email, i) {
             ${senderDisplay}
         </div>
         <div class="email-date" style="grid-area:date;">
-            ${email.date ? `${email.date}${isUnread ? ' <span style="color:#ebd1b7; font-size:10px; margin-left:5px; vertical-align:middle;">●</span>' : ''}` : ''}
+            ${email.date ? `${email.date}${isUnread ? ' <span style="color:var(--amber-link); font-size:10px; margin-left:5px; vertical-align:middle;">●</span>' : ''}` : ''}
         </div>
         <div class="email-content" style="grid-area:content;">
             <span class="email-subject">${email.subject}</span>
@@ -602,35 +602,40 @@ function renderEmailDetail(email) {
     const acc = accounts[activeAccountIndex];
     const myName = acc ? acc.name : 'Me';
     const myEmail = acc ? acc.email : 'user@gmail.com';
+    // Folder chip shown under the subject (Inbox / Sent / Drafts …)
+    const rawFolder = email.folder || state.currentFolder || 'inbox';
+    const folderLabel = rawFolder.charAt(0).toUpperCase() + rawFolder.slice(1);
 
     dom.emailDetailBody.innerHTML = `
         <!-- ═══════════════════════════════════
              ZONE 1: Subject row
              bg: #1b1b1b (Warm brown - exactly like screenshot top)
              ═══════════════════════════════════ -->
-        <h1 style="
-            font-size: 24px; margin: 0;
+        <div style="
             padding: 20px 16px 18px 20px;
-            font-weight: 400; line-height: 1.35;
-            color: var(--text-primary);
             background: var(--detail-bg);
             display: flex; align-items: flex-start;
             justify-content: space-between; gap: 14px;
         ">
             <div style="min-width:0;">
-                ${email.fullSubject || email.subject}
+                <h1 style="
+                    font-size: 24px; margin: 0;
+                    font-weight: 400; line-height: 1.35;
+                    color: var(--text-primary);
+                    overflow-wrap: break-word;
+                ">${email.fullSubject || email.subject}</h1>
                 <span style="
-                    display:inline-block; vertical-align:middle;
-                    margin-left:8px; padding:3px 10px;
+                    display:inline-block; margin-top:12px;
+                    padding:3px 10px;
                     background:var(--chip-bg); color:var(--chip-text);
                     border:1px solid var(--chip-border);
-                    border-radius:6px; font-size:14px;
-                    font-weight:400; line-height:1.4;
+                    border-radius:6px; font-size:13px;
+                    font-weight:500; line-height:1.5;
                     white-space:nowrap; cursor:pointer;
-                ">Add label</span>
+                ">${folderLabel}</span>
             </div>
             <span class="material-icons-outlined ${email.starred ? 'starred' : ''}" data-star-id="${email.id}" style="color:${email.starred ? '#f9ab00' : 'var(--text-secondary)'}; cursor:pointer; flex-shrink:0; margin-top:6px; font-size:26px;">${email.starred ? 'star' : 'star_border'}</span>
-        </h1>
+        </div>
 
         <!-- ZONE 2: Page background — lighter warm brown, same as subject row -->
         <div style="background: var(--detail-bg); padding: 4px 14px 28px 14px; flex: 1;">
@@ -669,7 +674,8 @@ function renderEmailDetail(email) {
                 <!-- Expanded "to me" details — slightly lifted warm shade -->
                 <div id="detail-expanded-info" class="hidden" style="
                     background: var(--detail-panel);
-                    margin: 0;
+                    margin: 0 14px 4px 14px;
+                    border-radius: 12px;
                     padding: 16px 18px 18px 18px;
                     font-size: 15px;
                 ">
@@ -760,16 +766,16 @@ function renderEmailDetail(email) {
                           <path d="M4 9h11a5 5 0 0 1 0 10h-1"/>
                         </svg> Forward
                     </button>
-                    <!-- Smiley — filled tan circle, same colour as the pills (matches reference) -->
+                    <!-- Smiley — dark warm circle with tan glyph (matches reference) -->
                     <button aria-label="React" style="
-                        background: var(--reply-pill-bg);
+                        background: var(--emoji-btn-bg);
                         border: none;
                         border-radius: 50%; width: 52px; height: 52px;
                         flex-shrink: 0; display: flex; align-items: center;
                         justify-content: center; cursor: pointer;
-                        color: var(--reply-pill-text);
+                        color: var(--emoji-btn-icon);
                         transition: background 0.15s;
-                    " onmouseover="this.style.background='var(--reply-pill-hover)'" onmouseout="this.style.background='var(--reply-pill-bg)'">
+                    " onmouseover="this.style.background='var(--warm-400)'" onmouseout="this.style.background='var(--emoji-btn-bg)'">
                         <span class="material-icons-outlined" style="font-size:24px;">sentiment_satisfied</span>
                     </button>
                 </div>
@@ -1722,7 +1728,7 @@ function openAddEmailFlow() {
     if ($('#ae-email-input')) $('#ae-email-input').value = '';
     if ($('#ae-subject-input')) $('#ae-subject-input').value = '';
     if ($('#ae-snippet-input')) $('#ae-snippet-input').value = '';
-    if ($('#ae-preview-avatar')) $('#ae-preview-avatar').innerHTML = '<span class="material-icons" style="font-size:28px; color:#bdc1c6;">account_circle</span>';
+    if ($('#ae-preview-avatar')) $('#ae-preview-avatar').innerHTML = '<span class="material-icons" style="font-size:28px; color:var(--text-tertiary);">account_circle</span>';
     if ($('#ae-tick-icon')) $('#ae-tick-icon').classList.remove('active');
     
     if (aeOverlay) aeOverlay.classList.remove('hidden');

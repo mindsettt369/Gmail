@@ -1,10 +1,10 @@
-const CACHE_NAME = 'gmail-clone-v54';
+const CACHE_NAME = 'gmail-clone-v55';
 const urlsToCache = [
   './',
   './index.html',
-  './index_v38.css?v=2',
-  './advanced_features.css?v=6',
-  './app_v42.js?v=3',
+  './index_v38.css?v=3',
+  './advanced_features.css?v=7',
+  './app_v42.js?v=4',
   './icon-192.png',
   './icon-512.png',
   './manifest.json',
