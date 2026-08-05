@@ -319,7 +319,7 @@ function updateCounts() {
 //  RENDER: Avatar HTML
 // ============================================
 function renderAvatarHTML(email, isMobile = false, isDetail = false) {
-    const size = isDetail ? 48 : (isMobile ? 36 : 40);
+    const size = isDetail ? 48 : (isMobile ? 52 : 40);
     
     if (email.avatarType === 'wati') {
         return `<div class="mobile-avatar" style="background:#25d366; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
@@ -336,17 +336,16 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
         </div>`;
     }
     if (email.avatarType === 'hostinger') {
-        // Exact Hostinger brand: white square, dark navy/purple rounded square, white H with slanted crossbar
-        return `<div class="mobile-avatar" style="background:#ffffff; width:${size}px; height:${size}px; border-radius:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <svg width="${size}" height="${size}" viewBox="0 0 26 26" fill="none">
-                <rect width="26" height="26" rx="6" fill="#2F1C6A"/>
-                <path fill="#ffffff" d="M7 6h3.4v5.6l5.2-1.9V6H19v14h-3.4v-5.6l-5.2 1.9V20H7z"/>
+        // Hostinger brand mark: white circle with violet "H" (slanted crossbar)
+        return `<div class="mobile-avatar" style="background:#ffffff; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;">
+            <svg width="${Math.round(size * 0.62)}" height="${Math.round(size * 0.62)}" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+                <path fill="#673DE6" d="M4 4h5v8.6l8-2.6V4h5v18h-5v-8.6l-8 2.6V22H4z"/>
             </svg>
         </div>`;
     }
     if (email.avatarType === 'updates') {
         return `<div class="mobile-avatar" style="background:transparent; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <span class="material-icons-outlined" style="font-size:24px; color:#e37400;">info</span>
+            <span class="material-icons-outlined" style="font-size:30px; color:#e37400;">info</span>
         </div>`;
     }
     if (email.avatarType === 'initial') {
@@ -363,7 +362,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     }
     if (email.avatarType === 'promotions') {
         return `<div class="mobile-avatar" style="background:transparent; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <span class="material-icons-outlined" style="font-size:24px; color:#1e8e3e;">local_offer</span>
+            <span class="material-icons-outlined" style="font-size:30px; color:#1e8e3e;">local_offer</span>
         </div>`;
     }
     if (email.avatarType === 'social') {
@@ -431,7 +430,7 @@ function renderMobileEmailList(filtered) {
     let html = '';
 
     // "Primary" section label
-    html += `<div style="padding:16px 16px 8px 16px; font-size:14px; color:#e3e3e3; font-weight:400; letter-spacing:0.2px;">Primary</div>`;
+    html += `<div style="padding:20px 20px 10px 20px; font-size:17px; color:#e3e3e3; font-weight:400; letter-spacing:0.2px;">Primary</div>`;
 
     // First 2 primary emails (most recent)
     const firstTwo = primaryEmails.slice(0, 2);
@@ -457,27 +456,27 @@ function renderMobileEmailList(filtered) {
 function renderMobileCategoryRow(email) {
     let iconHtml, badgeStyle;
     if (email.avatarType === 'updates') {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:20px; color:#e37400;">info</span>`;
-        badgeStyle = 'background:#e37400; color:#1a1210;';
+        iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:#e37400;">info</span>`;
+        badgeStyle = 'background:#f0a878; color:#1a1210;';
     } else if (email.avatarType === 'promotions') {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:20px; color:#1e8e3e;">local_offer</span>`;
-        badgeStyle = 'background:#1e8e3e; color:#fff;';
+        iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:#1e8e3e;">local_offer</span>`;
+        badgeStyle = 'background:#a8dcb8; color:#0d2b14;';
     } else {
-        iconHtml = `<span class="material-icons-outlined" style="font-size:20px; color:var(--text-secondary);">people</span>`;
+        iconHtml = `<span class="material-icons-outlined" style="font-size:28px; color:var(--text-secondary);">people</span>`;
         badgeStyle = email.badgeColor === 'orange' ? 'background:#e37400; color:#fff;' : 'background:#1a73e8; color:#fff;';
     }
 
     return `
     <div class="email-row mobile-category-row" data-email-id="${email.id}" style="animation-delay:0s">
-        <div class="mobile-avatar" style="background:transparent; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        <div class="mobile-avatar" style="background:transparent; width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
             ${iconHtml}
         </div>
-        <div style="flex:1; min-width:0; margin-left:12px;">
-            <div style="font-size:14px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:17px;">${email.sender}</div>
-            <div style="font-size:12px; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:1px; line-height:16px;">${email.subject}</div>
+        <div style="flex:1; min-width:0; margin-left:18px;">
+            <div style="font-size:18px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:24px;">${email.sender}</div>
+            <div style="font-size:16px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:3px; line-height:22px;">${email.subject}</div>
         </div>
-        <div style="flex-shrink:0; margin-left:8px;">
-            <span style="display:inline-block; padding:3px 8px; border-radius:20px; font-size:11px; font-weight:600; ${badgeStyle}">${email.badgeCount}</span>
+        <div style="flex-shrink:0; margin-left:10px;">
+            <span style="display:inline-block; padding:5px 12px; border-radius:20px; font-size:14px; font-weight:600; ${badgeStyle}">${email.badgeCount}</span>
         </div>
     </div>`;
 }
@@ -496,14 +495,14 @@ function renderMobileEmailRow(email, i) {
             ${senderDisplay}
         </div>
         <div class="email-date" style="grid-area:date;">
-            ${email.date ? `${email.date}${isUnread ? ' <span style="color:#ebd1b7; font-size:8px; margin-left:4px; vertical-align:middle;">●</span>' : ''}` : ''}
+            ${email.date ? `${email.date}${isUnread ? ' <span style="color:#ebd1b7; font-size:10px; margin-left:5px; vertical-align:middle;">●</span>' : ''}` : ''}
         </div>
         <div class="email-content" style="grid-area:content;">
             <span class="email-subject">${email.subject}</span>
             <span class="email-snippet">${email.snippet}</span>
         </div>
-        <div class="mobile-star ${email.starred ? 'starred' : ''}" data-star-id="${email.id}" onclick="event.stopPropagation()" style="grid-area:star; align-self:flex-end; margin-top:8px;">
-            <span class="${email.starred ? 'material-icons' : 'material-icons-outlined'}" style="font-size:20px; color:${email.starred ? '#f9ab00' : 'var(--text-tertiary)'};">
+        <div class="mobile-star ${email.starred ? 'starred' : ''}" data-star-id="${email.id}" onclick="event.stopPropagation()" style="grid-area:star; align-self:flex-end; margin-top:10px;">
+            <span class="${email.starred ? 'material-icons' : 'material-icons-outlined'}" style="font-size:26px; color:${email.starred ? '#f9ab00' : 'var(--text-tertiary)'};">
                 ${email.starred ? 'star' : 'star_border'}
             </span>
         </div>
