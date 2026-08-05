@@ -588,7 +588,7 @@ function stripEmailBg(html) {
         // Strip bgcolor attributes
         .replace(/\sbgcolor=['"][^'"]*['"]/gi, '')
         // Strip color styles that make text invisible on dark bg (white/near-white text)
-        .replace(/color\s*:\s*(white|#fff|#ffffff|rgb\(255,255,255\))/gi, 'color: #c8bfb5');
+        .replace(/color\s*:\s*(white|#fff|#ffffff|rgb\(255,255,255\))/gi, 'color: #bdc1c6');
 }
 
 // ============================================
@@ -604,30 +604,30 @@ function renderEmailDetail(email) {
     dom.emailDetailBody.innerHTML = `
         <!-- ═══════════════════════════════════
              ZONE 1: Subject row
-             bg: #1c130e (Warm brown - exactly like screenshot top)
+             bg: #1b1b1b (Warm brown - exactly like screenshot top)
              ═══════════════════════════════════ -->
         <h1 style="
             font-size: 22px; margin: 0;
             padding: 8px 16px 16px 16px;
             font-weight: 400; line-height: 1.35;
-            color: #e8e0d5;
-            background: #1c130e;
+            color: #e3e3e3;
+            background: #1b1b1b;
             display: flex; align-items: flex-start;
             justify-content: space-between; gap: 16px;
         ">
             <div>
                 ${email.subject}
-                ${email.folder === 'inbox' ? '<span style="background:#4a3b2c; color:#ffddb0; font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px; vertical-align:middle; margin-left:8px; display:inline-block; transform:translateY(-2px);">Inbox</span>' : ''}
+                ${email.folder === 'inbox' ? '<span style="background:transparent; color:#e3e3e3; font-size:12px; font-weight:400; padding:2px 10px; border:1px solid #5f6368; border-radius:6px; vertical-align:middle; margin-left:8px; display:inline-block; transform:translateY(-2px); white-space:nowrap;">Add label</span>' : ''}
             </div>
-            <span class="material-icons-outlined" style="color:#5a4f47; cursor:pointer; flex-shrink:0; margin-top:4px; font-size:22px;">star_border</span>
+            <span class="material-icons-outlined" style="color:#9aa0a6; cursor:pointer; flex-shrink:0; margin-top:4px; font-size:22px;">star_border</span>
         </h1>
 
         <!-- ZONE 2: Page Background = seamless warm (same as header) -->
-        <div style="background: #1c130e; padding: 12px 12px 24px 12px; flex: 1;">
+        <div style="background: #1b1b1b; padding: 12px 12px 24px 12px; flex: 1;">
 
             <!-- ZONE 3: Unified Card — exactly like reference image -->
             <div style="
-                background: #261c12;
+                background: #242424;
                 border-radius: 16px;
                 overflow: hidden;
             ">
@@ -638,18 +638,18 @@ function renderEmailDetail(email) {
                         <div style="flex:1; min-width:0; margin-left:12px;">
                             <div style="display:flex; align-items:center; justify-content:space-between;">
                                 <div style="display:flex; align-items:center; gap:6px; flex:1; min-width:0; overflow:hidden;">
-                                    <span style="font-weight:500; font-size:15px; color:#e8e0d5; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:130px;">${email.sender.length > 12 ? email.sender.substring(0,12)+'...' : email.sender}</span>
+                                    <span style="font-weight:500; font-size:15px; color:#e3e3e3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:130px;">${email.sender.length > 12 ? email.sender.substring(0,12)+'...' : email.sender}</span>
                                     ${email.verified ? '<span class="material-icons" style="color:#1d9bf0; font-size:14px; flex-shrink:0;">verified</span>' : ''}
-                                    <span style="color:#7a6e66; font-size:12px; white-space:nowrap; flex-shrink:0;">${email.date || ''}</span>
+                                    <span style="color:#9aa0a6; font-size:12px; white-space:nowrap; flex-shrink:0;">${email.date || ''}</span>
                                 </div>
-                                <div style="display:flex; align-items:center; gap:16px; color:#7a6e66; flex-shrink:0; margin-left:8px;">
+                                <div style="display:flex; align-items:center; gap:16px; color:#9aa0a6; flex-shrink:0; margin-left:8px;">
                                     <span class="material-icons-outlined" style="cursor:pointer; font-size:20px;">mood</span>
                                     <span class="material-icons-outlined" style="cursor:pointer; font-size:20px;">reply</span>
                                     <span class="material-icons" style="cursor:pointer; font-size:20px;">more_vert</span>
                                 </div>
                             </div>
                             <!-- "to me" toggle -->
-                            <div id="detail-to-me-btn" style="color:#7a6e66; font-size:12px; cursor:pointer; display:flex; align-items:center; margin-top:4px; user-select:none;">
+                            <div id="detail-to-me-btn" style="color:#9aa0a6; font-size:12px; cursor:pointer; display:flex; align-items:center; margin-top:4px; user-select:none;">
                                 to me <span class="material-icons" style="font-size:15px; margin-left:2px;">expand_more</span>
                             </div>
                         </div>
@@ -658,35 +658,35 @@ function renderEmailDetail(email) {
 
                 <!-- Expanded "to me" details — slightly deeper warm shade -->
                 <div id="detail-expanded-info" class="hidden" style="
-                    background: #231a10;
+                    background: #202124;
                     margin: 0;
                     padding: 14px 16px 16px 16px;
                     font-size: 13px;
                 ">
-                    <table style="width:100%; border-spacing:0; color:#7a6e66;">
+                    <table style="width:100%; border-spacing:0; color:#9aa0a6;">
                         <tr>
                             <td style="padding-bottom:10px; width:68px; vertical-align:top; white-space:nowrap; font-size:13px;">From</td>
-                            <td style="padding-bottom:10px; color:#c8bfb5; font-size:13px;"><span style="font-weight:500;">${email.sender}</span> • ${email.email}</td>
+                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;"><span style="font-weight:500;">${email.sender}</span> • ${email.email}</td>
                         </tr>
                         <tr>
                             <td style="padding-bottom:10px; vertical-align:top; font-size:13px;">Reply to</td>
-                            <td style="padding-bottom:10px; color:#c8bfb5; font-size:13px;">${email.email}</td>
+                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;">${email.email}</td>
                         </tr>
                         <tr>
                             <td style="padding-bottom:10px; vertical-align:top; font-size:13px;">To</td>
-                            <td style="padding-bottom:10px; color:#c8bfb5; font-size:13px;">${myName} &lt;${myEmail}&gt;</td>
+                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;">${myName} &lt;${myEmail}&gt;</td>
                         </tr>
                         <tr>
                             <td style="padding-bottom:10px; vertical-align:top; font-size:13px;">Date</td>
-                            <td style="padding-bottom:10px; color:#c8bfb5; font-size:13px;">${email.fullDate || email.date}</td>
+                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;">${email.fullDate || email.date}</td>
                         </tr>
                         <tr>
                             <td style="vertical-align:top; padding-top:2px;">
-                                <span class="material-icons-outlined" style="font-size:15px; color:#c8934a; vertical-align:middle;">lock</span>
+                                <span class="material-icons-outlined" style="font-size:15px; color:#9aa0a6; vertical-align:middle;">lock</span>
                             </td>
-                            <td style="color:#c8934a; font-size:13px;">
+                            <td style="color:#9aa0a6; font-size:13px;">
                                 Standard encryption (TLS).
-                                <a href="#" onclick="return false;" style="color:#c8934a; text-decoration:none; font-weight:500;"> See security details</a>
+                                <a href="#" onclick="return false;" style="color:#9aa0a6; text-decoration:none; font-weight:500;"> See security details</a>
                             </td>
                         </tr>
                     </table>
@@ -700,13 +700,13 @@ function renderEmailDetail(email) {
                 <div id="email-body-content" style="
                     background: transparent;
                     padding: 8px 16px 24px 16px;
-                    color: #e8e0d5;
+                    color: #e3e3e3;
                     font-size: 15px;
                     line-height: 1.5;
                     overflow-wrap: break-word;
                     word-break: break-word;
                 ">
-                    ${stripEmailBg(email.body && email.body !== '<p></p>' ? email.body : '<span style="color:#5a4f47;">(No content)</span>')}
+                    ${stripEmailBg(email.body && email.body !== '<p></p>' ? email.body : '<span style="color:#9aa0a6;">(No content)</span>')}
                 </div>
             </div>
         </div>
@@ -716,7 +716,7 @@ function renderEmailDetail(email) {
     dom.emailDetailFooter = dom.emailDetailFooter || $('#email-detail-footer');
     if (dom.emailDetailFooter) {
         dom.emailDetailFooter.innerHTML = `
-            <div style="background: #1c130e; padding: 10px 14px 94px 14px; width: 100%; box-sizing: border-box;">
+            <div style="background: #1b1b1b; padding: 10px 14px 94px 14px; width: 100%; box-sizing: border-box;">
                 <div style="display:flex; gap:8px; align-items:center;">
                     <!-- Reply pill — warm tan with thin stroke curved arrow (matches reference) -->
                     <button id="reply-btn" style="
