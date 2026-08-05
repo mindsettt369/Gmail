@@ -336,8 +336,8 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
         </div>`;
     }
     if (email.avatarType === 'hostinger') {
-        // Exact Hostinger brand: white circle, dark navy/purple rounded square, white H with slanted crossbar
-        return `<div class="mobile-avatar" style="background:#ffffff; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        // Exact Hostinger brand: white square, dark navy/purple rounded square, white H with slanted crossbar
+        return `<div class="mobile-avatar" style="background:#ffffff; width:${size}px; height:${size}px; border-radius:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
             <svg width="${size}" height="${size}" viewBox="0 0 26 26" fill="none">
                 <rect width="26" height="26" rx="6" fill="#2F1C6A"/>
                 <path fill="#ffffff" d="M7 6h3.4v5.6l5.2-1.9V6H19v14h-3.4v-5.6l-5.2 1.9V20H7z"/>
