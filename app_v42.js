@@ -36,7 +36,7 @@ const emails = [
         fullSubject: 'Your Starter Business Email plan is ready',
         snippet: 'Act now',
         body: `<p>Your Starter Business Email plan is waiting for you. Act now to get started with professional email hosting from Hostinger.</p>`,
-        date: '11:17',
+        date: '5 Aug',
         fullDate: 'Aug 5, 2026, 11:17 AM',
         unread: true, starred: false, important: false,
         labels: [], hasAttachment: false,
@@ -51,8 +51,8 @@ const emails = [
         fullSubject: 'Your Supabase Project mindexis is using excess resources',
         snippet: 'Hi there, To save on cloud resour…',
         body: `<p>Hi there,</p><p>To save on cloud resources, we recommend upgrading your Supabase project mindexis. This will help optimize performance and reduce costs significantly.</p>`,
-        date: '10:33',
-        fullDate: 'Aug 5, 2026, 10:33 AM',
+        date: '4 Aug',
+        fullDate: 'Aug 4, 2026, 10:33 AM',
         unread: false, starred: false, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'default',
@@ -144,8 +144,8 @@ const emails = [
         subject: 'Re: Project Update',
         snippet: 'Thanks for the update, will review...',
         body: `<p>Thanks for the update, will review and get back to you.</p>`,
-        date: '28 Jul',
-        fullDate: 'Jul 28, 2026, 9:45 AM',
+        date: '30 Jul',
+        fullDate: 'Jul 30, 2026, 9:45 AM',
         unread: false, starred: false, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'default',
@@ -158,8 +158,8 @@ const emails = [
         subject: 'Your domain is expiring soon',
         snippet: 'Renew now to keep your domain active...',
         body: `<p>Your domain is expiring soon. Renew now to keep your domain active.</p>`,
-        date: '25 Jul',
-        fullDate: 'Jul 25, 2026, 3:45 PM',
+        date: '24 Jul',
+        fullDate: 'Jul 24, 2026, 3:45 PM',
         unread: false, starred: true, important: false,
         labels: [], hasAttachment: false,
         avatarType: 'hostinger',
@@ -1186,7 +1186,7 @@ dom.sendBtn.addEventListener('click', () => {
         subject: subject || '(no subject)',
         snippet: body.replace(/<[^>]*>/g, '').substring(0, 100),
         body: body || '<p></p>',
-        date: 'Just now',
+        date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
         fullDate: new Date().toLocaleString(),
         unread: false,
         starred: false,
@@ -1826,7 +1826,7 @@ $('#ae-photo-done')?.addEventListener('click', () => {
         subject: customEmailData.subject,
         snippet: customEmailData.snippet,
         body: `<p>${customEmailData.snippet}</p>`,
-        date: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+        date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
         fullDate: new Date().toLocaleString(),
         unread: true, starred: false, important: false,
         labels: [], hasAttachment: false,
@@ -2083,8 +2083,10 @@ document.getElementById('dt-confirm-btn')?.addEventListener('click', () => {
 
     // Build display date
     const dt = new Date(`${dateVal}T${timeVal}`);
-    const displayTime = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const displayFull = dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + displayTime;
+    // List rows show a short date (e.g. "5 Aug"), never a clock time
+    const displayTime = dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+    const displayFull = dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
+        + ', ' + dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     // Gather compose data
     const acc = accounts[activeAccountIndex];
