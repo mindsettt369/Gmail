@@ -613,7 +613,7 @@ function renderEmailDetail(email) {
             padding: 20px 16px 18px 20px;
             font-weight: 400; line-height: 1.35;
             color: var(--text-primary);
-            background: var(--bg-primary);
+            background: var(--detail-bg);
             display: flex; align-items: flex-start;
             justify-content: space-between; gap: 14px;
         ">
@@ -621,22 +621,23 @@ function renderEmailDetail(email) {
                 ${email.fullSubject || email.subject}
                 <span style="
                     display:inline-block; vertical-align:middle;
-                    margin-left:8px; padding:3px 9px;
-                    background:#3d4f6b; color:#c6d9f7;
-                    border-radius:4px; font-size:14px;
-                    font-weight:400; line-height:1.3;
+                    margin-left:8px; padding:3px 10px;
+                    background:transparent; color:var(--chip-text);
+                    border:1px solid var(--chip-border);
+                    border-radius:6px; font-size:14px;
+                    font-weight:400; line-height:1.4;
                     white-space:nowrap; cursor:pointer;
                 ">Add label</span>
             </div>
             <span class="material-icons-outlined ${email.starred ? 'starred' : ''}" data-star-id="${email.id}" style="color:${email.starred ? '#f9ab00' : 'var(--text-secondary)'}; cursor:pointer; flex-shrink:0; margin-top:6px; font-size:26px;">${email.starred ? 'star' : 'star_border'}</span>
         </h1>
 
-        <!-- ZONE 2: Page Background = seamless warm (same as header) -->
-        <div style="background: var(--bg-primary); padding: 4px 14px 28px 14px; flex: 1;">
+        <!-- ZONE 2: Page background — lighter warm brown, same as subject row -->
+        <div style="background: var(--detail-bg); padding: 4px 14px 28px 14px; flex: 1;">
 
-            <!-- ZONE 3: Unified Card — exactly like reference image -->
+            <!-- ZONE 3: Message card — DARKER than the page (matches reference) -->
             <div style="
-                background: #26201c;
+                background: var(--detail-card);
                 border-radius: 18px;
                 overflow: hidden;
             ">
@@ -665,9 +666,9 @@ function renderEmailDetail(email) {
                     </div>
                 </div>
 
-                <!-- Expanded "to me" details — slightly deeper warm shade -->
+                <!-- Expanded "to me" details — slightly lifted warm shade -->
                 <div id="detail-expanded-info" class="hidden" style="
-                    background: #201a17;
+                    background: var(--detail-panel);
                     margin: 0;
                     padding: 16px 18px 18px 18px;
                     font-size: 15px;
@@ -725,18 +726,18 @@ function renderEmailDetail(email) {
     dom.emailDetailFooter = dom.emailDetailFooter || $('#email-detail-footer');
     if (dom.emailDetailFooter) {
         dom.emailDetailFooter.innerHTML = `
-            <div style="background: var(--bg-primary); padding: 10px 14px 94px 14px; width: 100%; box-sizing: border-box;">
+            <div style="background: var(--detail-bg); padding: 10px 14px 94px 14px; width: 100%; box-sizing: border-box;">
                 <div style="display:flex; gap:8px; align-items:center;">
                     <!-- Reply pill — warm tan with thin stroke curved arrow (matches reference) -->
                     <button id="reply-btn" style="
-                        background:#eccaa4; color:#2b1b10; border:none;
-                        border-radius:100px; height:50px; padding:0 20px;
-                        font-weight:500; font-size:15px;
-                        display:flex; align-items:center; gap:8px;
+                        background:var(--reply-pill-bg); color:var(--reply-pill-text); border:none;
+                        border-radius:100px; height:52px; padding:0 22px;
+                        font-weight:500; font-size:16px;
+                        display:flex; align-items:center; gap:9px;
                         flex:1; justify-content:center;
                         cursor:pointer; transition:background 0.15s;
                         font-family:var(--font-main);
-                    " onmouseover="this.style.background='#dcb68c'" onmouseout="this.style.background='#eccaa4'">
+                    " onmouseover="this.style.background='#cbb098'" onmouseout="this.style.background='var(--reply-pill-bg)'">
                         <!-- Thin curved reply arrow (like &#8617;) -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
                           <polyline points="9 14 4 9 9 4"/>
@@ -745,31 +746,31 @@ function renderEmailDetail(email) {
                     </button>
                     <!-- Forward pill — mirrored thin stroke curved arrow (matches reference) -->
                     <button id="forward-btn" style="
-                        background:#eccaa4; color:#2b1b10; border:none;
-                        border-radius:100px; height:50px; padding:0 20px;
-                        font-weight:500; font-size:15px;
-                        display:flex; align-items:center; gap:8px;
+                        background:var(--reply-pill-bg); color:var(--reply-pill-text); border:none;
+                        border-radius:100px; height:52px; padding:0 22px;
+                        font-weight:500; font-size:16px;
+                        display:flex; align-items:center; gap:9px;
                         flex:1; justify-content:center;
                         cursor:pointer; transition:background 0.15s;
                         font-family:var(--font-main);
-                    " onmouseover="this.style.background='#dcb68c'" onmouseout="this.style.background='#eccaa4'">
+                    " onmouseover="this.style.background='#cbb098'" onmouseout="this.style.background='var(--reply-pill-bg)'">
                         <!-- Thin curved forward arrow (like &#8618;, mirror of reply) -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; transform:scaleX(-1);">
                           <polyline points="9 14 4 9 9 4"/>
                           <path d="M4 9h11a5 5 0 0 1 0 10h-1"/>
                         </svg> Forward
                     </button>
-                    <!-- Smiley — transparent outline circle exactly like reference -->
-                    <button style="
-                        background: transparent;
-                        border: 1.5px solid #6b5844;
-                        border-radius: 50%; width: 50px; height: 50px;
+                    <!-- Smiley — filled tan circle, same colour as the pills (matches reference) -->
+                    <button aria-label="React" style="
+                        background: var(--reply-pill-bg);
+                        border: none;
+                        border-radius: 50%; width: 52px; height: 52px;
                         flex-shrink: 0; display: flex; align-items: center;
                         justify-content: center; cursor: pointer;
-                        color: #c8ae8a;
+                        color: var(--reply-pill-text);
                         transition: background 0.15s;
-                    " onmouseover="this.style.background='rgba(200,174,138,0.12)'" onmouseout="this.style.background='transparent'">
-                        <span class="material-icons-outlined" style="font-size:22px;">sentiment_satisfied</span>
+                    " onmouseover="this.style.background='#cbb098'" onmouseout="this.style.background='var(--reply-pill-bg)'">
+                        <span class="material-icons-outlined" style="font-size:24px;">sentiment_satisfied</span>
                     </button>
                 </div>
             </div>

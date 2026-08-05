@@ -96,6 +96,15 @@
     --shadow-md: none;
     --shadow-lg: 0 4px 12px rgba(0,0,0,0.4);
 
+    /* Email detail view — page surface is LIGHTER than the message card */
+    --detail-bg: #2a2220;
+    --detail-card: #1a1411;
+    --detail-panel: #231d1a;
+    --chip-border: #5c7ba6;
+    --chip-text: #a8c7f0;
+    --reply-pill-bg: #dbc4ab;
+    --reply-pill-text: #34251a;
+
     --nav-pill-bg: #2c2520;
     --nav-pill-active-bg: #4a3826;
     --bottom-nav-bg: #1a1210;
@@ -781,9 +790,9 @@ input {
 .email-detail {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    background: var(--bg-primary) !important;
-}
+  flex-direction: column;
+  background: var(--detail-bg) !important;
+  }
 
 .email-detail-header {
     display: flex;
@@ -811,10 +820,14 @@ input {
 }
 
 @media (max-width: 900px) {
-    .email-detail-body {
-        padding: 0;
-        padding-top: 0;
-    }
+  .email-detail-body {
+  padding: 0;
+  padding-top: 0;
+  /* Carry the page colour so no dark gap shows below the message card */
+  background: var(--detail-bg);
+  display: flex;
+  flex-direction: column;
+  }
     .email-detail {
         position: fixed;
         top: 0;
@@ -829,17 +842,17 @@ input {
     .email-detail-footer {
         position: sticky;
         bottom: 0;
-        z-index: 300;
-        flex-shrink: 0;
-        background: var(--bg-primary);
-    }
+  z-index: 300;
+  flex-shrink: 0;
+  background: var(--detail-bg);
+  }
     .email-detail-header {
         position: sticky;
-        top: 0;
-        z-index: 10;
-        background: var(--bg-primary);
-        border: none;
-        border-bottom: none;
+  top: 0;
+  z-index: 10;
+  background: var(--detail-bg);
+  border: none;
+  border-bottom: none;
         box-shadow: none;
         outline: none;
     }
