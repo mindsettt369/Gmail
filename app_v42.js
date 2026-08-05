@@ -33,6 +33,7 @@ const emails = [
         senderCount: null,
         email: 'noreply@hostinger.com',
         subject: 'Your Starter Business Email pla…',
+        fullSubject: 'Your Starter Business Email plan is ready',
         snippet: 'Act now',
         body: `<p>Your Starter Business Email plan is waiting for you. Act now to get started with professional email hosting from Hostinger.</p>`,
         date: '11:17',
@@ -47,6 +48,7 @@ const emails = [
         senderCount: null,
         email: 'ant.wilson@supabase.com',
         subject: 'Your Supabase Project mindexis i…',
+        fullSubject: 'Your Supabase Project mindexis is using excess resources',
         snippet: 'Hi there, To save on cloud resour…',
         body: `<p>Hi there,</p><p>To save on cloud resources, we recommend upgrading your Supabase project mindexis. This will help optimize performance and reduce costs significantly.</p>`,
         date: '10:33',
@@ -95,6 +97,7 @@ const emails = [
         senderCount: null,
         email: 'invoicing@aws.com',
         subject: 'Amazon Web Services GST Invoic…',
+        fullSubject: 'Amazon Web Services GST Invoice for July 2026',
         snippet: 'AWS logo Greetings from Amazon…',
         body: `<p>Greetings from Amazon Web Services. Please find your GST invoice attached for this billing period.</p>`,
         date: '2 Aug',
@@ -109,6 +112,7 @@ const emails = [
         senderCount: null,
         email: 'noreply@bitget.com',
         subject: 'Bitget CFD Weekly: How to Trade…',
+        fullSubject: 'Bitget CFD Weekly: How to Trade Market Volatility',
         snippet: 'Dear Bitget users: This week\'s un…',
         body: `<p>Dear Bitget users,</p><p>This week's update brings exciting new trading features and market insights for CFD traders.</p>`,
         date: '1 Aug',
@@ -123,6 +127,7 @@ const emails = [
         senderCount: null,
         email: 'business@meta.com',
         subject: 'Verification successful for ETERNI…',
+        fullSubject: 'Verification successful for ETERNITY TRADING COMPANY',
         snippet: 'ETERNITY TRADING COMPANY P…',
         body: `<p>Verification successful for ETERNITY TRADING COMPANY. Your business has been verified on Meta.</p>`,
         date: '25 Jul',
@@ -319,7 +324,7 @@ function updateCounts() {
 //  RENDER: Avatar HTML
 // ============================================
 function renderAvatarHTML(email, isMobile = false, isDetail = false) {
-    const size = isDetail ? 48 : (isMobile ? 52 : 40);
+    const size = isDetail ? 64 : (isMobile ? 52 : 40);
     
     if (email.avatarType === 'wati') {
         return `<div class="mobile-avatar" style="background:#25d366; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
@@ -381,7 +386,7 @@ function renderAvatarHTML(email, isMobile = false, isDetail = false) {
     // Fallback — colored initial
     const avatarColor = randomAvatarColor(email.sender);
     const initial = email.sender.charAt(0).toUpperCase();
-    return `<div class="mobile-avatar" style="background:${avatarColor}; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:white; font-size:18px; font-weight:600; font-family:var(--font-main);">
+    return `<div class="mobile-avatar" style="background:${avatarColor}; width:${size}px; height:${size}px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:white; font-size:${Math.round(size * 0.44)}px; font-weight:500; font-family:var(--font-main); line-height:1;">
         ${initial}
     </div>`;
 }
@@ -399,7 +404,7 @@ function renderEmailList() {
             <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:60vh;padding-top:10vh;color:var(--text-tertiary);gap:16px;">
                 <span class="material-icons-outlined" style="font-size:80px;color:var(--text-tertiary);">markunread_mailbox</span>
                 <div style="font-family:var(--font-main);font-size:18px;color:var(--text-primary);font-weight:400;">Nothing here yet</div>
-                <div style="font-size:13px;color:var(--text-secondary);">Emails for this view will show up here</div>
+                <div style="font-size:15px;color:var(--text-secondary);">Emails for this view will show up here</div>
             </div>
         `;
         return;
@@ -604,49 +609,57 @@ function renderEmailDetail(email) {
              bg: #1b1b1b (Warm brown - exactly like screenshot top)
              ═══════════════════════════════════ -->
         <h1 style="
-            font-size: 22px; margin: 0;
-            padding: 8px 16px 16px 16px;
+            font-size: 24px; margin: 0;
+            padding: 20px 16px 18px 20px;
             font-weight: 400; line-height: 1.35;
             color: #e3e3e3;
             background: #1b1b1b;
             display: flex; align-items: flex-start;
-            justify-content: space-between; gap: 16px;
+            justify-content: space-between; gap: 14px;
         ">
-            <div>
-                ${email.subject}
+            <div style="min-width:0;">
+                ${email.fullSubject || email.subject}
+                <span style="
+                    display:inline-block; vertical-align:middle;
+                    margin-left:8px; padding:3px 9px;
+                    background:#3c4043; color:#c8d4e8;
+                    border-radius:4px; font-size:14px;
+                    font-weight:400; line-height:1.3;
+                    white-space:nowrap; cursor:pointer;
+                ">Add label</span>
             </div>
-            <span class="material-icons-outlined" style="color:#9aa0a6; cursor:pointer; flex-shrink:0; margin-top:4px; font-size:22px;">star_border</span>
+            <span class="material-icons-outlined ${email.starred ? 'starred' : ''}" data-star-id="${email.id}" style="color:${email.starred ? '#f9ab00' : '#9aa0a6'}; cursor:pointer; flex-shrink:0; margin-top:6px; font-size:26px;">${email.starred ? 'star' : 'star_border'}</span>
         </h1>
 
         <!-- ZONE 2: Page Background = seamless warm (same as header) -->
-        <div style="background: #1b1b1b; padding: 12px 12px 24px 12px; flex: 1;">
+        <div style="background: #1b1b1b; padding: 4px 14px 28px 14px; flex: 1;">
 
             <!-- ZONE 3: Unified Card — exactly like reference image -->
             <div style="
-                background: #242424;
-                border-radius: 16px;
+                background: #262626;
+                border-radius: 18px;
                 overflow: hidden;
             ">
                 <!-- Avatar + Name + Icons row -->
-                <div style="padding: 14px 16px 10px 16px;">
+                <div style="padding: 18px 16px 14px 18px;">
                     <div style="display:flex; align-items:flex-start;">
                         ${avatarHtml}
-                        <div style="flex:1; min-width:0; margin-left:12px;">
+                        <div style="flex:1; min-width:0; margin-left:16px;">
                             <div style="display:flex; align-items:center; justify-content:space-between;">
-                                <div style="display:flex; align-items:center; gap:6px; flex:1; min-width:0; overflow:hidden;">
-                                    <span style="font-weight:500; font-size:15px; color:#e3e3e3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:130px;">${email.sender.length > 12 ? email.sender.substring(0,12)+'...' : email.sender}</span>
-                                    ${email.verified ? '<span class="material-icons" style="color:#1d9bf0; font-size:14px; flex-shrink:0;">verified</span>' : ''}
-                                    <span style="color:#9aa0a6; font-size:12px; white-space:nowrap; flex-shrink:0;">${email.date || ''}</span>
+                                <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:0; overflow:hidden;">
+                                    <span style="font-weight:500; font-size:18px; color:#e3e3e3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:120px;">${email.sender}</span>
+                                    ${email.verified ? '<span class="material-icons" style="color:#1d9bf0; font-size:16px; flex-shrink:0;">verified</span>' : ''}
+                                    <span style="color:#9aa0a6; font-size:15px; white-space:nowrap; flex-shrink:0;">${email.date || ''}</span>
                                 </div>
-                                <div style="display:flex; align-items:center; gap:16px; color:#9aa0a6; flex-shrink:0; margin-left:8px;">
-                                    <span class="material-icons-outlined" style="cursor:pointer; font-size:20px;">mood</span>
-                                    <span class="material-icons-outlined" style="cursor:pointer; font-size:20px;">reply</span>
-                                    <span class="material-icons" style="cursor:pointer; font-size:20px;">more_vert</span>
+                                <div style="display:flex; align-items:center; gap:18px; color:#9aa0a6; flex-shrink:0; margin-left:10px;">
+                                    <span class="material-icons-outlined" style="cursor:pointer; font-size:24px;">mood</span>
+                                    <span class="material-icons-outlined" style="cursor:pointer; font-size:24px;">reply</span>
+                                    <span class="material-icons" style="cursor:pointer; font-size:24px;">more_vert</span>
                                 </div>
                             </div>
-                            <!-- "to me" toggle -->
-                            <div id="detail-to-me-btn" style="color:#9aa0a6; font-size:12px; cursor:pointer; display:flex; align-items:center; margin-top:4px; user-select:none;">
-                                to me <span class="material-icons" style="font-size:15px; margin-left:2px;">expand_more</span>
+                            <!-- "to ..." toggle -->
+                            <div id="detail-to-me-btn" style="color:#9aa0a6; font-size:16px; cursor:pointer; display:flex; align-items:center; margin-top:6px; user-select:none;">
+                                to ${email.recipientLabel || 'me'} <span class="material-icons" style="font-size:19px; margin-left:3px;">expand_more</span>
                             </div>
                         </div>
                     </div>
@@ -654,33 +667,33 @@ function renderEmailDetail(email) {
 
                 <!-- Expanded "to me" details — slightly deeper warm shade -->
                 <div id="detail-expanded-info" class="hidden" style="
-                    background: #202124;
+                    background: #1f1f1f;
                     margin: 0;
-                    padding: 14px 16px 16px 16px;
-                    font-size: 13px;
+                    padding: 16px 18px 18px 18px;
+                    font-size: 15px;
                 ">
                     <table style="width:100%; border-spacing:0; color:#9aa0a6;">
                         <tr>
-                            <td style="padding-bottom:10px; width:68px; vertical-align:top; white-space:nowrap; font-size:13px;">From</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;"><span style="font-weight:500;">${email.sender}</span> • ${email.email}</td>
+                            <td style="padding-bottom:10px; width:80px; vertical-align:top; white-space:nowrap; font-size:15px;">From</td>
+                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:15px;"><span style="font-weight:500;">${email.sender}</span> • ${email.email}</td>
                         </tr>
                         <tr>
-                            <td style="padding-bottom:10px; vertical-align:top; font-size:13px;">Reply to</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;">${email.email}</td>
+                            <td style="padding-bottom:10px; vertical-align:top; font-size:15px;">Reply to</td>
+                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:15px;">${email.email}</td>
                         </tr>
                         <tr>
-                            <td style="padding-bottom:10px; vertical-align:top; font-size:13px;">To</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;">${myName} &lt;${myEmail}&gt;</td>
+                            <td style="padding-bottom:10px; vertical-align:top; font-size:15px;">To</td>
+                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:15px;">${myName} &lt;${myEmail}&gt;</td>
                         </tr>
                         <tr>
-                            <td style="padding-bottom:10px; vertical-align:top; font-size:13px;">Date</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:13px;">${email.fullDate || email.date}</td>
+                            <td style="padding-bottom:10px; vertical-align:top; font-size:15px;">Date</td>
+                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:15px;">${email.fullDate || email.date}</td>
                         </tr>
                         <tr>
                             <td style="vertical-align:top; padding-top:2px;">
-                                <span class="material-icons-outlined" style="font-size:15px; color:#9aa0a6; vertical-align:middle;">lock</span>
+                                <span class="material-icons-outlined" style="font-size:17px; color:#9aa0a6; vertical-align:middle;">lock</span>
                             </td>
-                            <td style="color:#9aa0a6; font-size:13px;">
+                            <td style="color:#9aa0a6; font-size:15px;">
                                 Standard encryption (TLS).
                                 <a href="#" onclick="return false;" style="color:#9aa0a6; text-decoration:none; font-weight:500;"> See security details</a>
                             </td>
@@ -695,10 +708,10 @@ function renderEmailDetail(email) {
                      ═══════════════════════════════════ -->
                 <div id="email-body-content" style="
                     background: transparent;
-                    padding: 8px 16px 24px 16px;
+                    padding: 14px 18px 28px 18px;
                     color: #e3e3e3;
-                    font-size: 15px;
-                    line-height: 1.5;
+                    font-size: 17px;
+                    line-height: 1.55;
                     overflow-wrap: break-word;
                     word-break: break-word;
                 ">
