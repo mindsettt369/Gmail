@@ -590,7 +590,7 @@ function stripEmailBg(html) {
         // Strip bgcolor attributes
         .replace(/\sbgcolor=['"][^'"]*['"]/gi, '')
         // Strip color styles that make text invisible on dark bg (white/near-white text)
-        .replace(/color\s*:\s*(white|#fff|#ffffff|rgb\(255,255,255\))/gi, 'color: #bdc1c6');
+        .replace(/color\s*:\s*(white|#fff|#ffffff|rgb\(255,255,255\))/gi, 'color: var(--text-primary)');
 }
 
 // ============================================
@@ -676,19 +676,19 @@ function renderEmailDetail(email) {
                     <table style="width:100%; border-spacing:0; color:var(--text-secondary);">
                         <tr>
                             <td style="padding-bottom:10px; width:80px; vertical-align:top; white-space:nowrap; font-size:15px;">From</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:15px;"><span style="font-weight:500;">${email.sender}</span> • ${email.email}</td>
+                            <td style="padding-bottom:10px; color:var(--text-primary); font-size:15px;"><span style="font-weight:500;">${email.sender}</span> • ${email.email}</td>
                         </tr>
                         <tr>
                             <td style="padding-bottom:10px; vertical-align:top; font-size:15px;">Reply to</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:15px;">${email.email}</td>
+                            <td style="padding-bottom:10px; color:var(--text-primary); font-size:15px;">${email.email}</td>
                         </tr>
                         <tr>
                             <td style="padding-bottom:10px; vertical-align:top; font-size:15px;">To</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:15px;">${myName} &lt;${myEmail}&gt;</td>
+                            <td style="padding-bottom:10px; color:var(--text-primary); font-size:15px;">${myName} &lt;${myEmail}&gt;</td>
                         </tr>
                         <tr>
                             <td style="padding-bottom:10px; vertical-align:top; font-size:15px;">Date</td>
-                            <td style="padding-bottom:10px; color:#bdc1c6; font-size:15px;">${email.fullDate || email.date}</td>
+                            <td style="padding-bottom:10px; color:var(--text-primary); font-size:15px;">${email.fullDate || email.date}</td>
                         </tr>
                         <tr>
                             <td style="vertical-align:top; padding-top:2px;">

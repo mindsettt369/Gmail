@@ -85,9 +85,9 @@
     --bg-active: #4a3826;
     --bg-selected: rgba(255, 255, 255, 0.08);
 
-    --text-primary: #e9e1dd;
-    --text-secondary: #a8a09b;
-    --text-tertiary: #837c78;
+    --text-primary: #ffffff;
+    --text-secondary: #ded3cb;
+    --text-tertiary: #b5aaa2;
 
     --border-light: #302a25;
     --border-lighter: #2a241f;
@@ -98,16 +98,16 @@
 
     /* Email detail view — page surface is LIGHTER than the message card */
     --detail-bg: #261f19;
-    --detail-card: #19110e;
-    --detail-panel: #251e18;
-    --chip-bg: #26252b;
-    --chip-border: #5c5c60;
-    --chip-text: #f0eeec;
+    --detail-card: #19120c;
+    --detail-panel: #261f19;
+    --chip-bg: #221e22;
+    --chip-border: #56545a;
+    --chip-text: #f5f2f0;
     --reply-pill-bg: #e0c1a4;
     --reply-pill-text: #3b2a1a;
     --reply-pill-hover: #cfae90;
-    --detail-icon: #eee5da;
-    --link-warm: #e8caa6;
+    --detail-icon: #fff5eb;
+    --link-warm: #f5d3ba;
 
     --nav-pill-bg: #302921;
     --nav-pill-active-bg: #58422b;
