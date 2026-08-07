@@ -1,8 +1,8 @@
-const CACHE_NAME = 'gmail-clone-v56';
+const CACHE_NAME = 'gmail-clone-v57';
 const urlsToCache = [
   './',
   './index.html',
-  './index_v38.css?v=3',
+  './index_v38.css?v=4',
   './advanced_features.css?v=7',
   './app_v42.js?v=4',
   './icon-192.png',
